@@ -1,34 +1,23 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
-
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
+    <div className="container py-5">
+      <h1 className="mb-4">Holidaze Style Test</h1>
+      <p className="text-muted">
+        This is a body paragraph using <strong>Source Sans 3</strong>.
       </p>
-    </>
+      <div className="alert alert-primary mt-3">Alert Primary</div>
+      <button className="btn btn-primary me-2">Primary Button</button>
+      <button className="btn btn-secondary">Secondary Button</button>
+      <hr className="my-4" />
+      <div className="card" style={{ maxWidth: '18rem' }}>
+        <div className="card-body">
+          <h5 className="card-title">Card Title</h5>
+          <p className="card-text">
+            A simple card to confirm Bootstrap and theme colors are working.
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
 
