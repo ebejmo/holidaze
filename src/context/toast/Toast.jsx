@@ -1,7 +1,7 @@
 export function Toast({ message, variant, onDismiss }) {
   return (
     <div
-      className={`toast align-items-center text-bg-${variant} border-0 show`}
+      className={`toast align-items-center border-0 show text-bg-${variant}`}
       role="status"
       aria-live="polite"
     >

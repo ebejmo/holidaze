@@ -1,19 +1,29 @@
-$font-family-sans-serif: 'Source Sans 3', sans-serif;
-$headings-font-family: 'Poppins', sans-serif;
-
-$background: #f9f9f7;
-$text-dark: #2d2d2d;
-
 $primary: #e0785f;
 $secondary: #81b29a;
 $accent: #f2cc8f;
-
 $success: #198754;
 $danger: #dc3545;
 $info: #0d6efd;
 $white: #ffffff;
+$light: #f9f9f7;
+$dark: #2d2d2d;
 
 $text-muted: #6c757d;
 $border-color: #e0e0e0;
 
-$spacer: 1rem;
+$font-family-sans-serif: 'Source Sans 3', system-ui, sans-serif;
+$headings-font-family: 'Poppins', system-ui, sans-serif;
+
+$h1-font-size: 2.5rem;
+$h2-font-size: 2rem;
+$h3-font-size: 1.75rem;
+$h4-font-size: 1.5rem;
+$h5-font-size: 1.25rem;
+
+$lead-font-size: 1.125rem;
+$font-size-base: 1rem;
+$small-font-size: 0.875rem;
+
+$fw-bold: 600;
+$fw-semibold: 500;
+$fw-medium: 400;

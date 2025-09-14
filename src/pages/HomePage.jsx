@@ -8,10 +8,24 @@ export default function HomePage() {
       <h1>Home Page</h1>
       <div className="container">
         <button
-          className="btn btn-success"
+          className="btn btn-primary"
           onClick={() => addToast('Venue created', 'success')}
         >
-          ShowToast
+          Primary
+        </button>
+
+        <button
+          className="btn btn-outline-secondary"
+          onClick={() => addToast('Venue created', 'success')}
+        >
+          Secondary
+        </button>
+
+        <button
+          className="btn btn-danger"
+          onClick={() => addToast('Venue created', 'success')}
+        >
+          Delete
         </button>
       </div>
     </div>
