@@ -1,3 +1,4 @@
+import Spinner from '../components/ui/Spinner';
 import { useToast } from '../context/toast/useToast';
 
 export default function HomePage() {
@@ -7,6 +8,11 @@ export default function HomePage() {
     <div>
       <h1>Home Page</h1>
       <div className="container">
+        <Spinner centered size="sm" color="info" />
+        <Spinner centered />
+        <button className="btn btn-primary" disabled>
+          <Spinner size="sm" color="light" /> Loading...
+        </button>
         <button
           className="btn btn-primary"
           onClick={() => addToast('Venue created', 'success')}
