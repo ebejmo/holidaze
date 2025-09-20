@@ -1,3 +1,15 @@
+import EmptyState from '../components/ui/EmptyState';
+
 export default function NotFoundPage() {
-  return <h1>404 Page Not Found</h1>;
+  return (
+    <>
+      <EmptyState
+        icon="warning"
+        title="Page not found"
+        body="The page you're looking for doesn't exist."
+        cta={{ label: 'Go Home', to: '/' }}
+        variant="fullpage"
+      />
+    </>
+  );
 }
