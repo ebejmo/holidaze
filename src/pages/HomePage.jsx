@@ -1,3 +1,4 @@
+import TestForm from '../components/forms/TestForm';
 import EmptyState from '../components/ui/EmptyState';
 import Icon from '../components/ui/Icon';
 import Spinner from '../components/ui/Spinner';
@@ -25,6 +26,10 @@ export default function HomePage() {
           body={'We could not find and venues matching'}
           variant="inline"
         />
+      </div>
+      <div className="container">
+        <h2>Try Out Form</h2>
+        <TestForm />
       </div>
     </div>
   );
