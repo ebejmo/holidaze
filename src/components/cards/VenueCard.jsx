@@ -33,12 +33,12 @@ export default function VenueCard({ venue }) {
         </div>
         <div className="card-body">
           {typeof rating === 'number' && (
-            <span className="badge mb-2">
+            <span className="badge mb-3">
               {rating.toFixed(1)} {getRatingLabel(rating)}
             </span>
           )}
-          <h5 className="card-title">{name}</h5>
-          <p className="card-text mb-1">
+          <h5 className="card-title mb-2">{name}</h5>
+          <p className="card-text mb-2">
             {city}, {country}
           </p>
           {price !== undefined && <p className="price">{price} kr / night</p>}

@@ -1,6 +1,12 @@
 .venue-card {
   border: none;
   background-color: $white;
+  transition: box-shadow 0.2s ease;
+
+  &:hover,
+  &:focus {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
 
   .card-img-top-wrapper {
     height: 180px;
@@ -23,24 +29,21 @@
   .badge {
     background-color: $accent;
     color: $dark;
-    font-weight: $fw-medium;
+    font-weight: $fw-semibold;
     align-self: flex-start;
-    margin-bottom: 0.5rem;
   }
 
   .card-title {
     font-size: $font-size-base;
-    font-weight: $fw-medium;
-    margin-bottom: 0.5rem;
+    font-weight: $fw-semibold;
   }
 
   .card-text {
     font-size: $small-font-size;
-    margin-bottom: 0.5rem;
   }
 
   .price {
     margin-top: auto;
-    font-weight: $fw-medium;
+    font-weight: $fw-semibold;
   }
 }
