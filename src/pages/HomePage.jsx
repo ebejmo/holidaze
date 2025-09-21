@@ -3,9 +3,17 @@ import { useApi } from '../hooks/useApi';
 import { ENDPOINTS } from '../config';
 import EmptyState from '../components/ui/EmptyState';
 import Spinner from '../components/ui/Spinner';
+import VenueCard from '../components/cards/VenueCard';
+import { useEffect } from 'react';
 
 export default function HomePage() {
   const { data: venues, loading, error } = useApi(ENDPOINTS.venues);
+
+  useEffect(() => {
+    if (venues) {
+      console.log('Fetched venues:', venues);
+    }
+  }, [venues]);
 
   if (loading) return <Spinner centered />;
   if (error) return <EmptyState title="Error" body={String(error)} />;
@@ -13,15 +21,11 @@ export default function HomePage() {
   return (
     <div className="container py-4">
       <h1 className="mb-3">Holidaze Venues</h1>
-      <ul className="list-unstyled">
+      <div className="row">
         {venues.map((venue) => (
-          <li key={venue.id} className="mb-2">
-            <Link to={`/venues/${venue.id}`} className="text-decoration-none">
-              {venue.name}
-            </Link>
-          </li>
+          <VenueCard key={venue.id} venue={venue} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

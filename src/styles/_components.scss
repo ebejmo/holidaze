@@ -1,38 +1,4 @@
-.btn {
-  font-family: $headings-font-family;
-  font-weight: $fw-medium;
-  border-radius: 0.4rem;
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
-}
-
-.btn-primary {
-  background-color: $primary;
-  color: $dark;
-
-  &:hover,
-  &:focus {
-    background-color: darken($primary, 7%);
-    color: $dark;
-  }
-
-  &:disabled,
-  &.disabled {
-    background-color: lighten($primary, 15%);
-    color: $dark;
-  }
-}
-
-.btn-outline-secondary {
-  background-color: transparent;
-  border-color: $secondary;
-  color: $secondary;
-
-  &:hover,
-  &:focus {
-    background-color: darken($secondary, 7%);
-    border-color: darken($secondary, 7%);
-    color: $white;
-  }
-}
+@import './components/buttons';
+@import './components/cards';
+// @import "./components/forms";
+// @import "./components/modals";

@@ -1,0 +1,46 @@
+.venue-card {
+  border: none;
+  background-color: $white;
+
+  .card-img-top-wrapper {
+    height: 180px;
+    overflow: hidden;
+
+    img.card-img-top {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
+  .badge {
+    background-color: $accent;
+    color: $dark;
+    font-weight: $fw-medium;
+    align-self: flex-start;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-title {
+    font-size: $font-size-base;
+    font-weight: $fw-medium;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-text {
+    font-size: $small-font-size;
+    margin-bottom: 0.5rem;
+  }
+
+  .price {
+    margin-top: auto;
+    font-weight: $fw-medium;
+  }
+}
