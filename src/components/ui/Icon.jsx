@@ -43,13 +43,13 @@ export default function Icon({ name, size = 'md', className = '', ...props }) {
   let sizePx;
   switch (size) {
     case 'sm':
-      sizePx = 16;
+      sizePx = 12;
       break;
     case 'lg':
-      sizePx = 32;
+      sizePx = 18;
       break;
     default:
-      sizePx = 24;
+      sizePx = 16;
   }
 
   return <IconComponent size={sizePx} className={className} {...props} />;
