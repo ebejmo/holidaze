@@ -1,8 +1,6 @@
 import { useState, useMemo } from 'react';
 import { AuthContext } from './AuthContext';
 
-// export const AuthContext = createContext(null);
-
 const getInitialState = () => {
   const storedUser = localStorage.getItem('user');
   const storedToken = localStorage.getItem('accessToken');

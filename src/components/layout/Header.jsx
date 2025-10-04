@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/auth/useAuth';
 import { useModal } from '../../context/modal/useModal';
-import AuthForm from '../auth/AuthForm';
+import AuthModal from '../modal/AuthModal';
 
 export default function Header() {
   const { isAuthenticated, user, isManager, logout } = useAuth();
-  const { openModal } = useModal(); // need to use the hook
+  const { openModal } = useModal();
 
   const handleOpenAuth = (mode) => {
-    openModal(
-      <AuthForm initialMode={mode} />,
-      mode === 'login' ? 'Login' : 'Register'
-    );
+    const title = mode === 'login' ? 'Login' : 'Register';
+    const content = <AuthModal initialMode={mode} />;
+
+    openModal(content, title);
   };
 
   return (
@@ -27,9 +27,6 @@ export default function Header() {
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
-            // aria-controls="navbarNav"
-            // aria-expanded="false"
-            // aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
