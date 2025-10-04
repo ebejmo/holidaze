@@ -1,8 +1,20 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/auth/useAuth';
+import { useModal } from '../../context/modal/useModal';
+import AuthForm from '../auth/AuthForm';
 
 export default function Header() {
+  const { isAuthenticated, user, isManager, logout } = useAuth();
+  const { openModal } = useModal(); // need to use the hook
+
+  const handleOpenAuth = (mode) => {
+    openModal(
+      <AuthForm initialMode={mode} />,
+      mode === 'login' ? 'Login' : 'Register'
+    );
+  };
+
   return (
-    // skeleton -> improve styles and functionality later
     <header>
       <nav className="navbar navbar-expand-md navbar-light bg-light border-bottom">
         <div className="container">
@@ -15,9 +27,9 @@ export default function Header() {
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
+            // aria-controls="navbarNav"
+            // aria-expanded="false"
+            // aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -34,11 +46,50 @@ export default function Header() {
                   Venues
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/profile">
-                  Profile
-                </Link>
-              </li>
+
+              {!isAuthenticated ? (
+                <>
+                  <li className="nav-item">
+                    <div className="d-flex flex-column flex-md-row gap-2 w-100">
+                      <button
+                        className="btn btn-primary flex-fill"
+                        onClick={() => handleOpenAuth('login')}
+                      >
+                        Login
+                      </button>
+                      <button
+                        className="btn btn-outline-primary flex-fill"
+                        onClick={() => handleOpenAuth('register')}
+                      >
+                        Register
+                      </button>
+                    </div>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/profile">
+                      {user?.name || 'Profile'}
+                    </Link>
+                  </li>
+                  {isManager && (
+                    <li className="nav-item">
+                      <Link className="nav-link" to="/manage">
+                        Manage
+                      </Link>
+                    </li>
+                  )}
+                  <li className="nav-item">
+                    <button
+                      className="btn btn-outline-secondary"
+                      onClick={logout}
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
