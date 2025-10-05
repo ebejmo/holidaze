@@ -52,7 +52,7 @@ export default function Header() {
                         className="btn btn-primary flex-fill"
                         onClick={() => handleOpenAuth('login')}
                       >
-                        Login
+                        Log in
                       </button>
                       <button
                         className="btn btn-outline-primary flex-fill"

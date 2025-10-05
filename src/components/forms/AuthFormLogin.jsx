@@ -68,6 +68,7 @@ export default function AuthFormLogin({ onSwitch }) {
         <button
           type="button"
           className="btn btn-link p-0 small text-info"
+          style={{ font: 'inherit', verticalAlign: 'baseline' }}
           onClick={onSwitch}
         >
           Register here

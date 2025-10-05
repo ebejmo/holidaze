@@ -7,7 +7,7 @@ import { useModal } from '../../context/modal/useModal';
 
 export default function AuthFormRegister({ onSwitch, role = 'guest' }) {
   const { addToast } = useToast();
-  const { closeModal, openModal } = useModal();
+  const { closeModal } = useModal();
 
   const {
     register,
@@ -16,6 +16,10 @@ export default function AuthFormRegister({ onSwitch, role = 'guest' }) {
   } = useForm({
     resolver: yupResolver(registerSchema),
   });
+
+  const submitLabel = isSubmitting
+    ? 'Please wait...'
+    : `Register as ${role === 'manager' ? 'Host' : 'Guest'}`;
 
   async function onSubmit(data) {
     try {
@@ -85,7 +89,7 @@ export default function AuthFormRegister({ onSwitch, role = 'guest' }) {
         className="btn btn-primary w-100"
         disabled={isSubmitting}
       >
-        {isSubmitting ? 'Please wait...' : 'Register'}
+        {submitLabel}
       </button>
 
       <p className="text-center small mt-3 mb-0">
@@ -93,6 +97,7 @@ export default function AuthFormRegister({ onSwitch, role = 'guest' }) {
         <button
           type="button"
           className="btn btn-link p-0 small text-info"
+          style={{ font: 'inherit', verticalAlign: 'baseline' }}
           onClick={onSwitch}
         >
           Log in
