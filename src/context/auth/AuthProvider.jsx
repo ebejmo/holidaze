@@ -1,39 +1,53 @@
-import { useState, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { AuthContext } from './AuthContext';
 
+const USER_KEY = 'user';
+const TOKEN_KEY = 'token';
+
+const getInitialState = () => {
+  const storedUser = localStorage.getItem(USER_KEY);
+  const storedToken = localStorage.getItem(TOKEN_KEY);
+  if (storedUser && storedToken) {
+    return { user: JSON.parse(storedUser), accessToken: storedToken };
+  }
+  return { user: null, token: null };
+};
+
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [accessToken, setAccessToken] = useState(null);
+  const [auth, setAuth] = useState(getInitialState);
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    const storedToken = localStorage.getItem('accessToken');
+  const login = (apiResult) => {
+    // const authState = { user: userData, accessToken: token };
+    // setAuth(authState);
+    // localStorage.setItem('user', JSON.stringify(userData));
+    // localStorage.setItem('accessToken', token);
+    const token = apiResult.accessToken;
+    const userData = apiResult;
 
-    if (storedUser && storedToken) {
-      setUser(JSON.parse(storedUser));
-      setAccessToken(storedToken);
-    }
-  }, []);
+    const authState = { user: userData, token };
+    setAuth(authState);
 
-  const login = (userData, token) => {
-    setUser(userData);
-    setAccessToken(token);
-
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('accessToken', token);
+    localStorage.setItem(USER_KEY, JSON.stringify(userData));
+    localStorage.setItem(TOKEN_KEY, token);
   };
 
   const logout = () => {
-    setUser(null);
-    setAccessToken(null);
-
-    localStorage.removeItem('user');
-    localStorage.removeItem('accessToken');
+    const emptyState = { user: null, token: null };
+    setAuth(emptyState);
+    localStorage.removeItem(USER_KEY);
+    localStorage.removeItem(TOKEN_KEY);
   };
 
-  return (
-    <AuthContext.Provider value={{ user, accessToken, login, logout }}>
-      {children}
-    </AuthContext.Provider>
+  const value = useMemo(
+    () => ({
+      ...auth,
+      login,
+      logout,
+      isAuthenticated: !!auth.user && !!auth.token,
+      isManager: !!auth.user?.venueManager,
+    }),
+    [auth]
   );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

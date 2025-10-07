@@ -6,14 +6,17 @@ import './styles/index.scss';
 import App from './App.jsx';
 import { AuthProvider } from './context/auth/AuthProvider';
 import { ToastProvider } from './context/toast/ToastProvider';
+import { ModalProvider } from './context/modal/ModalProvider.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
       <ToastProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <ModalProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ModalProvider>
       </ToastProvider>
     </AuthProvider>
   </StrictMode>
