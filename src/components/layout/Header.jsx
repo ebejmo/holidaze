@@ -66,7 +66,10 @@ export default function Header() {
               ) : (
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/profile">
+                    <Link
+                      className="nav-link"
+                      to={`/profile/${user?.name || ''}`}
+                    >
                       {user?.name || 'Profile'}
                     </Link>
                   </li>

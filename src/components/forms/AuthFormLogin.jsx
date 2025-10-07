@@ -4,10 +4,12 @@ import { loginSchema } from '../../schemas/loginSchema';
 import { loginUser } from '../../api/auth';
 import { useToast } from '../../context/toast/useToast';
 import { useModal } from '../../context/modal/useModal';
+import { useAuth } from '../../context/auth/useAuth';
 
 export default function AuthFormLogin({ onSwitch }) {
   const { addToast } = useToast();
   const { closeModal } = useModal();
+  const { login } = useAuth();
 
   const {
     register,
@@ -21,9 +23,11 @@ export default function AuthFormLogin({ onSwitch }) {
     try {
       const result = await loginUser(data);
       console.log('Logged in:', result);
+      login(result);
 
       addToast('Login successful!', 'success');
       closeModal();
+      // add spinner + redirect
     } catch (error) {
       addToast(error.message || 'Login failed. Please try again', 'danger');
     }

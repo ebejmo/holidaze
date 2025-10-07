@@ -1,30 +1,41 @@
 import { useState, useMemo } from 'react';
 import { AuthContext } from './AuthContext';
 
+const USER_KEY = 'user';
+const TOKEN_KEY = 'token';
+
 const getInitialState = () => {
-  const storedUser = localStorage.getItem('user');
-  const storedToken = localStorage.getItem('accessToken');
+  const storedUser = localStorage.getItem(USER_KEY);
+  const storedToken = localStorage.getItem(TOKEN_KEY);
   if (storedUser && storedToken) {
     return { user: JSON.parse(storedUser), accessToken: storedToken };
   }
-  return { user: null, accessToken: null };
+  return { user: null, token: null };
 };
 
 export function AuthProvider({ children }) {
   const [auth, setAuth] = useState(getInitialState);
 
-  const login = (userData, token) => {
-    const authState = { user: userData, accessToken: token };
+  const login = (apiResult) => {
+    // const authState = { user: userData, accessToken: token };
+    // setAuth(authState);
+    // localStorage.setItem('user', JSON.stringify(userData));
+    // localStorage.setItem('accessToken', token);
+    const token = apiResult.accessToken;
+    const userData = apiResult;
+
+    const authState = { user: userData, token };
     setAuth(authState);
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('accessToken', token);
+
+    localStorage.setItem(USER_KEY, JSON.stringify(userData));
+    localStorage.setItem(TOKEN_KEY, token);
   };
 
   const logout = () => {
-    const emptyState = { user: null, accessToken: null };
+    const emptyState = { user: null, token: null };
     setAuth(emptyState);
-    localStorage.removeItem('user');
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem(USER_KEY);
+    localStorage.removeItem(TOKEN_KEY);
   };
 
   const value = useMemo(
@@ -32,7 +43,7 @@ export function AuthProvider({ children }) {
       ...auth,
       login,
       logout,
-      isAuthenticated: !!auth.user && !!auth.accessToken,
+      isAuthenticated: !!auth.user && !!auth.token,
       isManager: !!auth.user?.venueManager,
     }),
     [auth]
