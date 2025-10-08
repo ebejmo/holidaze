@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '../../schemas/loginSchema';
@@ -5,11 +7,14 @@ import { loginUser } from '../../api/auth';
 import { useToast } from '../../context/toast/useToast';
 import { useModal } from '../../context/modal/useModal';
 import { useAuth } from '../../context/auth/useAuth';
+import Spinner from '../ui/Spinner';
 
 export default function AuthFormLogin({ onSwitch }) {
   const { addToast } = useToast();
   const { closeModal } = useModal();
   const { login } = useAuth();
+  const navigate = useNavigate();
+  const [redirecting, setRedirecting] = useState(false);
 
   const {
     register,
@@ -24,10 +29,14 @@ export default function AuthFormLogin({ onSwitch }) {
       const result = await loginUser(data);
       console.log('Logged in:', result);
       login(result);
-
       addToast('Login successful!', 'success');
-      closeModal();
-      // add spinner + redirect
+      setRedirecting(true);
+
+      setTimeout(() => {
+        closeModal();
+        const username = result?.name || result?.data?.name;
+        navigate(`/profile/${encodeURIComponent(username)}`);
+      });
     } catch (error) {
       addToast(error.message || 'Login failed. Please try again', 'danger');
     }
@@ -62,10 +71,24 @@ export default function AuthFormLogin({ onSwitch }) {
       <button
         type="submit"
         className="btn btn-primary w-100"
-        disabled={isSubmitting}
+        disabled={isSubmitting || redirecting}
       >
-        {isSubmitting ? 'Please wait...' : 'Log in'}
+        {isSubmitting
+          ? 'Please wait...'
+          : redirecting
+            ? 'Redirecting...'
+            : 'Log in'}
       </button>
+
+      {redirecting && (
+        <div
+          className="d-flex align-items-center justify-content-center gap-2 mt-3 small text-muted"
+          aria-live="polite"
+        >
+          <Spinner size="sm" />
+          <span>Redirecting to your profile…</span>
+        </div>
+      )}
 
       <p className="text-center small mt-3 mb-0">
         No account?{' '}

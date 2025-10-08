@@ -1,17 +1,26 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth/useAuth';
 import { useModal } from '../../context/modal/useModal';
+import { useToast } from '../../context/toast/useToast';
 import AuthModal from '../modal/AuthModal';
+import { GuestNav } from './GuestNav';
+import UserNav from './UserNav';
 
 export default function Header() {
-  const { isAuthenticated, user, isManager, logout } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   const { openModal } = useModal();
+  const { addToast } = useToast();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logout();
+    addToast('You have been logged out.', 'info');
+    navigate('/');
+  }
 
   const handleOpenAuth = (mode) => {
     const title = mode === 'login' ? 'Login' : 'Register';
-    const content = <AuthModal initialMode={mode} />;
-
-    openModal(content, title);
+    openModal(<AuthModal initialMode={mode} />, title);
   };
 
   return (
@@ -32,65 +41,30 @@ export default function Header() {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
+            <ul className="navbar-nav me-auto">
               <li className="nav-item">
                 <Link className="nav-link" to="/">
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/venues/1">
-                  Venues
-                </Link>
-              </li>
 
-              {!isAuthenticated ? (
-                <>
-                  <li className="nav-item">
-                    <div className="d-flex flex-column flex-md-row gap-2 w-100">
-                      <button
-                        className="btn btn-primary flex-fill"
-                        onClick={() => handleOpenAuth('login')}
-                      >
-                        Log in
-                      </button>
-                      <button
-                        className="btn btn-outline-primary flex-fill"
-                        onClick={() => handleOpenAuth('register')}
-                      >
-                        Register
-                      </button>
-                    </div>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      to={`/profile/${user?.name || ''}`}
-                    >
-                      {user?.name || 'Profile'}
-                    </Link>
-                  </li>
-                  {isManager && (
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/manage">
-                        Manage
-                      </Link>
-                    </li>
-                  )}
-                  <li className="nav-item">
-                    <button
-                      className="btn btn-outline-secondary"
-                      onClick={logout}
-                    >
-                      Logout
-                    </button>
-                  </li>
-                </>
+              {isAuthenticated && (
+                <li className="nav-item">
+                  <Link
+                    className="nav-link"
+                    to={`/profile/${user?.name || ''}`}
+                  >
+                    Profile
+                  </Link>
+                </li>
               )}
             </ul>
+
+            {!isAuthenticated ? (
+              <GuestNav onAuthClick={handleOpenAuth} />
+            ) : (
+              <UserNav onLogout={handleLogout} />
+            )}
           </div>
         </div>
       </nav>
