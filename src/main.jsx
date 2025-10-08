@@ -10,14 +10,14 @@ import { ModalProvider } from './context/modal/ModalProvider.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <ToastProvider>
-        <ModalProvider>
-          <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
+        <ToastProvider>
+          <ModalProvider>
             <App />
-          </BrowserRouter>
-        </ModalProvider>
-      </ToastProvider>
-    </AuthProvider>
+          </ModalProvider>
+        </ToastProvider>
+      </AuthProvider>
+    </BrowserRouter>
   </StrictMode>
 );

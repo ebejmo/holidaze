@@ -34,7 +34,10 @@ export default function AuthFormRegister({ onSwitch, role = 'guest' }) {
       closeModal();
     } catch (error) {
       console.error('Register error:', error);
-      addToast(error.message || 'Registration failed. Please try again.');
+      addToast(
+        error.message || 'Registration failed. Please try again.',
+        'danger'
+      );
     }
   }
 
