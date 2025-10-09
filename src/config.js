@@ -6,6 +6,9 @@ export const ENDPOINTS = {
   login: '/auth/login',
 
   venues: '/holidaze/venues',
-  bookings: '/holidaze/bookings',
+  singleVenue: (id) => `/holidaze/venues/${id}?_owner=true&_bookings=true`,
+  createBooking: '/holidaze/bookings',
+  deleteVenue: (id) => `/holidaze/venues/${id}`,
+
   profiles: '/holidaze/profiles',
 };

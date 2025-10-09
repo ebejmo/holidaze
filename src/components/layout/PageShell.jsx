@@ -7,7 +7,7 @@ export default function PageShell() {
     <div className="d-flex flex-column min-vh-100">
       <Header />
 
-      <main className="flex-fill container py-4">
+      <main>
         <Outlet />
       </main>
 

@@ -4,10 +4,16 @@ import { useApi } from '../hooks/useApi';
 import { ENDPOINTS } from '../config';
 import Spinner from '../components/ui/Spinner';
 import EmptyState from '../components/ui/EmptyState';
+import VenueGallery from '../components/venueDetail/VenueGallery';
 
 export default function VenueDetailPage() {
   const { id } = useParams();
-  const { data: venue, loading, error } = useApi(ENDPOINTS.venues + '/' + id);
+
+  const endpoint = ENDPOINTS.singleVenue
+    ? ENDPOINTS.singleVenue(id)
+    : `${ENDPOINTS.venues}/${id}?_owner=true&_bookings=true`;
+
+  const { data: venue, loading, error } = useApi(endpoint);
 
   useEffect(() => {
     if (venue?.name) {
@@ -21,6 +27,8 @@ export default function VenueDetailPage() {
 
   return (
     <div className="container py-4">
+      <VenueGallery media={venue.media} title={venue.name} />
+
       <h1 className="h3">{venue.name}</h1>
       <p className="text-muted">ID: {venue.id}</p>
     </div>
