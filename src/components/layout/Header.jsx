@@ -1,14 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth/useAuth';
-import { useModal } from '../../context/modal/useModal';
+import { useAppModals } from '../../hooks/useAppModals';
 import { useToast } from '../../context/toast/useToast';
-import AuthModal from '../modal/AuthModal';
 import { GuestNav } from './GuestNav';
 import UserNav from './UserNav';
 
 export default function Header() {
   const { isAuthenticated, user, logout } = useAuth();
-  const { openModal } = useModal();
+  const { openAuthModal } = useAppModals();
   const { addToast } = useToast();
   const navigate = useNavigate();
 
@@ -17,11 +16,6 @@ export default function Header() {
     addToast('You have been logged out.', 'info');
     navigate('/');
   }
-
-  const handleOpenAuth = (mode) => {
-    const title = mode === 'login' ? 'Login' : 'Register';
-    openModal(<AuthModal initialMode={mode} />, title);
-  };
 
   return (
     <header>
@@ -61,7 +55,7 @@ export default function Header() {
             </ul>
 
             {!isAuthenticated ? (
-              <GuestNav onAuthClick={handleOpenAuth} />
+              <GuestNav onAuthClick={openAuthModal} />
             ) : (
               <UserNav onLogout={handleLogout} />
             )}

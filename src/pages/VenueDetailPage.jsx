@@ -1,10 +1,16 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useAuth } from '../context/auth/useAuth';
 import { useApi } from '../hooks/useApi';
 import { ENDPOINTS } from '../config';
 import Spinner from '../components/ui/Spinner';
 import EmptyState from '../components/ui/EmptyState';
 import VenueGallery from '../components/venueDetail/VenueGallery';
+import VenueHeader from '../components/venueDetail/VenueHeader';
+import VenueInfo from '../components/venueDetail/VenueInfo';
+import VenueAbout from '../components/venueDetail/VenueAbout';
+import VenueAmenities from '../components/venueDetail/VenueAmenities';
+import VenueBookingSection from '../components/venueDetail/VenueBookingSection';
 
 export default function VenueDetailPage() {
   const { id } = useParams();
@@ -14,6 +20,8 @@ export default function VenueDetailPage() {
     : `${ENDPOINTS.venues}/${id}?_owner=true&_bookings=true`;
 
   const { data: venue, loading, error } = useApi(endpoint);
+  const { user, isAuthenticated } = useAuth();
+  const isOwner = venue?.owner?.name === user?.name;
 
   useEffect(() => {
     if (venue?.name) {
@@ -28,8 +36,23 @@ export default function VenueDetailPage() {
   return (
     <div className="container py-4">
       <VenueGallery media={venue.media} title={venue.name} />
+      <VenueHeader
+        title={venue.name}
+        rating={venue.rating}
+        owner={venue.owner}
+      />
+      <VenueInfo
+        location={venue.location}
+        price={venue.price}
+        maxGuests={venue.maxGuests}
+      />
+      <VenueAbout description={venue.description} created={venue.created} />
+      <VenueAmenities meta={venue.meta} />
+      <VenueBookingSection
+        isAuthenticated={isAuthenticated}
+        isOwner={isOwner}
+      />
 
-      <h1 className="h3">{venue.name}</h1>
       <p className="text-muted">ID: {venue.id}</p>
     </div>
   );

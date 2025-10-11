@@ -59,3 +59,9 @@ small,
   font-size: $small-font-size;
   color: $text-muted;
 }
+
+.btn-link-inherit {
+  font-family: inherit !important;
+  padding: 0;
+  color: $info;
+}
