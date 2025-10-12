@@ -65,3 +65,11 @@ small,
   padding: 0;
   color: $info;
 }
+
+.max-w-220 {
+  max-width: 220px;
+
+  .guest-display {
+    flex: 1;
+  }
+}

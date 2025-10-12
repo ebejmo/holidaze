@@ -1,6 +1,14 @@
 import { useAppModals } from '../../hooks/useAppModals';
+import BookingForm from '../forms/BookingForm';
 
-export default function VenueBookingSection({ isAuthenticated, isOwner }) {
+export default function VenueBookingSection({
+  isAuthenticated,
+  isOwner,
+  price,
+  maxGuests,
+  venueId,
+  existingBookings = [],
+}) {
   const { openAuthModal } = useAppModals();
 
   if (isOwner) {
@@ -14,16 +22,15 @@ export default function VenueBookingSection({ isAuthenticated, isOwner }) {
     );
   }
 
-  return (
-    <section className="mb-5">
-      <h2 className="h5 mb-2">Book your stay</h2>
-
-      {!isAuthenticated ? (
+  if (!isAuthenticated) {
+    return (
+      <section className="mb-5">
+        <h2 className="h5 mb-2">Book your stay</h2>
         <p className="text-muted small mb-0">
           Please{' '}
           <button
             type="button"
-            className="btn btn-link btn-link-inherit text-info align-baseline"
+            className="btn btn-link btn-link-inherit align-baseline"
             onClick={() => openAuthModal('login')}
           >
             log in
@@ -31,16 +38,27 @@ export default function VenueBookingSection({ isAuthenticated, isOwner }) {
           or{' '}
           <button
             type="button"
-            className=" btn btn-link btn-link-inherit text-info p-0 align-baseline"
-            onClick={() => openAuthModal('Register')}
+            className="btn btn-link btn-link-inherit align-baseline"
+            onClick={() => openAuthModal('register')}
           >
             register
           </button>{' '}
           to make a reservation.
         </p>
-      ) : (
-        <p className="text-muted small mb-0">Booking form coming...</p>
-      )}
+      </section>
+    );
+  }
+
+  return (
+    <section className="mb-5">
+      <h2 className="h5 mb-2">Book your stay</h2>
+
+      <BookingForm
+        price={price}
+        maxGuests={maxGuests}
+        venueId={venueId}
+        existingBookings={existingBookings}
+      />
     </section>
   );
 }

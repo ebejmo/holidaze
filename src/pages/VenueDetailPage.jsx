@@ -51,9 +51,11 @@ export default function VenueDetailPage() {
       <VenueBookingSection
         isAuthenticated={isAuthenticated}
         isOwner={isOwner}
+        price={venue.price}
+        maxGuests={venue.maxGuests}
+        venueId={venue.id}
+        existingBookings={venue.bookings}
       />
-
-      <p className="text-muted">ID: {venue.id}</p>
     </div>
   );
 }

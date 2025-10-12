@@ -7,7 +7,7 @@ export const ENDPOINTS = {
 
   venues: '/holidaze/venues',
   singleVenue: (id) => `/holidaze/venues/${id}?_owner=true&_bookings=true`,
-  createBooking: '/holidaze/bookings',
+  bookings: '/holidaze/bookings',
   deleteVenue: (id) => `/holidaze/venues/${id}`,
 
   profiles: '/holidaze/profiles',
