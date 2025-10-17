@@ -3,9 +3,9 @@ export default function VenueAbout({ description, created }) {
     <section className="mb-4">
       <h2 className="h5 mb-2">About this venue</h2>
       {description ? (
-        <p className="mb-0 text-muted">{description}</p>
+        <p className="mb-0">{description}</p>
       ) : (
-        <p className="mb-0 text-muted">No description provided by venue host</p>
+        <p className="mb-0">No description provided by venue host</p>
       )}
 
       {created && (

@@ -4,7 +4,7 @@ export default function VenueAmenities({ meta = [] }) {
   return (
     <section className="mb-4">
       <h2 className="h5 mb-2">Amenities</h2>
-      <div className="d-flex flex-wrap gap-3 text-muted small">
+      <div className="d-flex flex-wrap gap-3 small">
         <div className="d-flex align-items-center gap-2">
           <Icon name="wifi" size="lg" />
           <span>{meta.wifi ? 'Wi-Fi included' : 'No Wi-Fi'}</span>

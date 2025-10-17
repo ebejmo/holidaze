@@ -1,5 +1,6 @@
 import { useAppModals } from '../../hooks/useAppModals';
 import BookingForm from '../forms/BookingForm';
+import ManagerSection from './ManagerSection';
 
 export default function VenueBookingSection({
   isAuthenticated,
@@ -14,17 +15,14 @@ export default function VenueBookingSection({
   if (isOwner) {
     return (
       <section className="mb-5">
-        <h2 className="h5 mb-2">Manage bookings</h2>
-        <p className="text-muted small">
-          You own this venue. Manage bookings will be here.
-        </p>
+        <ManagerSection bookings={existingBookings} venueId={venueId} />
       </section>
     );
   }
 
   if (!isAuthenticated) {
     return (
-      <section className="mb-5">
+      <section className="mb-5 p-3 sticky-top">
         <h2 className="h5 mb-2">Book your stay</h2>
         <p className="text-muted small mb-0">
           Please{' '}
@@ -50,7 +48,7 @@ export default function VenueBookingSection({
   }
 
   return (
-    <section className="mb-5">
+    <section className="mb-5 p-3 bg-white rounded sticky-lg-top">
       <h2 className="h5 mb-2">Book your stay</h2>
 
       <BookingForm

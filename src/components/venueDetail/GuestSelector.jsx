@@ -19,7 +19,7 @@ export default function GuestSelector({
           aria-label="Decrease guests"
           disabled={guests <= 1 || isSubmitting}
         >
-          –
+          -
         </button>
 
         <span
@@ -41,7 +41,7 @@ export default function GuestSelector({
       </div>
 
       {error && <p className="text-danger small mb-0">{error}</p>}
-      <div className="form-text">Max guests: {maxGuests}</div>
+      <div className="text-muted small">Max guests: {maxGuests}</div>
     </div>
   );
 }

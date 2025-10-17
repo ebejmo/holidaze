@@ -5,13 +5,13 @@ export default function VenueInfo({ location, price, maxGuests }) {
 
   return (
     <section className="mb-4">
-      <div className="d-flex flex-wrap gap-4 text-muted small">
+      <div className="d-flex flex-wrap gap-4 small">
         <div className="d-flex align-items-center gap-2">
           <Icon name="location" size="lg" />
           <span>
             {city && country ? `${city}, ${country}` : 'Location unknown'}
           </span>
-          {address && <div className="small text-muted">{address}</div>}
+          {address && <div className="small">{address}</div>}
         </div>
 
         <div className="d-flex align-items-center gap-2">

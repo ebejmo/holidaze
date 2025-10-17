@@ -57,7 +57,6 @@ p {
 small,
 .small {
   font-size: $small-font-size;
-  color: $text-muted;
 }
 
 .btn-link-inherit {
@@ -72,4 +71,17 @@ small,
   .guest-display {
     flex: 1;
   }
+}
+
+.badge-holidaze {
+  background-color: $accent;
+  color: $dark;
+  font-weight: $fw-semibold;
+  align-self: flex-start;
+}
+
+.venue-avatar {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
 }
