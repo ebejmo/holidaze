@@ -1,13 +1,5 @@
 import { Link } from 'react-router-dom';
-
-function getRatingLabel(rating) {
-  if (rating >= 5) return 'Amazing';
-  if (rating >= 3) return 'Great';
-  if (rating >= 2) return 'Good';
-  if (rating >= 1) return 'Fair';
-
-  return 'Unrated';
-}
+import { getRatingLabel } from '../../utils/ratingUtils';
 
 export default function VenueCard({ venue }) {
   const { id, name, media, location, price, rating } = venue;
@@ -15,7 +7,7 @@ export default function VenueCard({ venue }) {
   const imageUrl =
     media && media.length > 0
       ? media[0].url
-      : 'https://dummyimage.com/600x400/fff/aaa';
+      : 'https://placehold.co/600x400/orange/white?text=Holidaze';
   const imageAlt =
     media && media.length > 0 ? media[0].alt || name : `${name} image`;
 
@@ -33,7 +25,7 @@ export default function VenueCard({ venue }) {
         </div>
         <div className="card-body">
           {typeof rating === 'number' && (
-            <span className="badge mb-3">
+            <span className="badge badge-holidaze mb-3">
               {rating.toFixed(1)} {getRatingLabel(rating)}
             </span>
           )}

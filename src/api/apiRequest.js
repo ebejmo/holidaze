@@ -7,7 +7,7 @@ export async function apiRequest(endpoint, method = 'GET', data, auth = false) {
   };
 
   if (auth) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('accessToken');
     if (token) headers.Authorization = `Bearer ${token}`;
   }
 

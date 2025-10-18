@@ -7,18 +7,20 @@ export function ModalProvider({ children }) {
     isOpen: false,
     title: '',
     content: null,
+    size: 'md',
   });
 
-  const openModal = useCallback((content, title = '') => {
-    setModalState({ isOpen: true, title, content });
-  });
+  const openModal = useCallback((content, options = {}) => {
+    const { title = '', size = 'md' } = options;
+    setModalState({ isOpen: true, title, content, size });
+  }, []);
 
   const closeModal = useCallback(() => {
-    setModalState({ isOpen: false, title: '', content: null });
+    setModalState({ isOpen: false, title: '', content: null, size: 'md' });
   }, []);
 
   const setTitle = useCallback((title) => {
-    setModalState((prev) => (prev.title === title ? prev : { ...prev, title }));
+    setModalState((prev) => ({ ...prev, title }));
   }, []);
 
   const context = useMemo(
@@ -33,6 +35,7 @@ export function ModalProvider({ children }) {
         show={modalState.isOpen}
         onClose={closeModal}
         title={modalState.title}
+        size={modalState.size}
       >
         {modalState.content}
       </Modal>
