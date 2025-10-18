@@ -1,6 +1,6 @@
 export default function VenueAbout({ description, created }) {
   return (
-    <section className="mb-4">
+    <section className="venue-about mb-4" aria-label="Venue about">
       <h2 className="h5 mb-2">About this venue</h2>
       {description ? (
         <p className="mb-0">{description}</p>

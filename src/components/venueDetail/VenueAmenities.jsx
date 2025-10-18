@@ -1,29 +1,52 @@
 import Icon from '../ui/Icon';
 
-export default function VenueAmenities({ meta = [] }) {
+export function AmenityItem({ icon, isAvailable, text }) {
+  const textColor = isAvailable ? '' : 'text-muted';
+  const iconColor = isAvailable ? 'text-secondary' : 'text-muted';
+
   return (
-    <section className="mb-4">
+    <div className="d-flex align-items-center gap-2">
+      <Icon name={icon} size="lg" className={iconColor} />
+      <span className={textColor}>{text}</span>
+    </div>
+  );
+}
+
+export default function VenueAmenities({ meta = {} }) {
+  const AMENITIES = [
+    { key: 'wifi', icon: 'wifi', yes: 'Wi-Fi included', no: 'No Wi-Fi' },
+    {
+      key: 'parking',
+      icon: 'parking',
+      yes: 'Parking available',
+      no: 'No parking',
+    },
+    {
+      key: 'breakfast',
+      icon: 'breakfast',
+      yes: 'Breakfast included',
+      no: 'No breakfast',
+    },
+    { key: 'pets', icon: 'pets', yes: 'Pets allowed', no: 'No pets allowed' },
+  ];
+
+  return (
+    <section className="venue-amenities mb-4" aria-label="Venue amenities">
       <h2 className="h5 mb-2">Amenities</h2>
+
       <div className="d-flex flex-wrap gap-3 small">
-        <div className="d-flex align-items-center gap-2">
-          <Icon name="wifi" size="lg" />
-          <span>{meta.wifi ? 'Wi-Fi included' : 'No Wi-Fi'}</span>
-        </div>
+        {AMENITIES.map(({ key, icon, yes, no }) => {
+          const isAvailable = meta?.[key];
 
-        <div className="d-flex align-items-center gap-2">
-          <Icon name="parking" size="lg" />
-          <span>{meta.parking ? 'Parking available' : 'No parking'}</span>
-        </div>
-
-        <div className="d-flex align-items-center gap-2">
-          <Icon name="breakfast" size="lg" />
-          <span>{meta.breakfast ? 'Breakfast included' : 'No breakfast'}</span>
-        </div>
-
-        <div className="d-flex align-items-center gap-2">
-          <Icon name="pets" size="lg" />
-          <span>{meta.pets ? 'Pets allowed' : 'No pets allowed'}</span>
-        </div>
+          return (
+            <AmenityItem
+              key={key}
+              icon={icon}
+              isAvailable={isAvailable}
+              text={isAvailable ? yes : no}
+            />
+          );
+        })}
       </div>
     </section>
   );

@@ -14,7 +14,10 @@ export default function VenueBookingSection({
 
   if (isOwner) {
     return (
-      <section className="mb-5">
+      <section
+        className="mb-5 venue-booking"
+        aria-label="Venue manager section"
+      >
         <ManagerSection bookings={existingBookings} venueId={venueId} />
       </section>
     );
@@ -22,13 +25,16 @@ export default function VenueBookingSection({
 
   if (!isAuthenticated) {
     return (
-      <section className="mb-5 p-3 sticky-top">
+      <section
+        className="mb-5 sticky-lg-top p-3 rounded bg-white venue-booking z-0"
+        aria-label="Venue booking section"
+      >
         <h2 className="h5 mb-2">Book your stay</h2>
         <p className="text-muted small mb-0">
           Please{' '}
           <button
             type="button"
-            className="btn btn-link btn-link-inherit align-baseline"
+            className="btn btn-link btn-link-inherit small text-info align-baseline"
             onClick={() => openAuthModal('login')}
           >
             log in
@@ -36,7 +42,7 @@ export default function VenueBookingSection({
           or{' '}
           <button
             type="button"
-            className="btn btn-link btn-link-inherit align-baseline"
+            className="btn btn-link btn-link-inherit small text-info align-baseline"
             onClick={() => openAuthModal('register')}
           >
             register
@@ -48,7 +54,10 @@ export default function VenueBookingSection({
   }
 
   return (
-    <section className="mb-5 p-3 bg-white rounded sticky-lg-top">
+    <section
+      className="mb-5 p-3 bg-white rounded sticky-lg-top venue-booking"
+      aria-label="Venue booking section"
+    >
       <h2 className="h5 mb-2">Book your stay</h2>
 
       <BookingForm

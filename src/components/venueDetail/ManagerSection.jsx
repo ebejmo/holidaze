@@ -1,4 +1,5 @@
 export default function ManagerSection({ bookings = [], venueId }) {
+  //lets revisit this when create venue is created
   const hasBookings = bookings.length > 0;
 
   return (
@@ -22,6 +23,7 @@ export default function ManagerSection({ bookings = [], venueId }) {
                   src={booking.customer?.avatar?.url}
                   alt={booking.customer?.name}
                   className="rounded-circle me-3"
+                  // add this to stylesheet
                   width="48"
                   height="48"
                 />

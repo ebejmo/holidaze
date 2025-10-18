@@ -8,8 +8,6 @@ export default function VenueSummary({ title, rating, owner }) {
 
   const isRated = typeof rating === 'number';
 
-  console.log('VenueSummary rating:', rating, typeof rating);
-
   return (
     <div className="mb-4">
       <div className="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between mb-2">
