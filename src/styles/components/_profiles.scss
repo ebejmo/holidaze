@@ -1,0 +1,17 @@
+.profile-banner {
+  min-height: 160px;
+  max-height: 200px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+}
+
+.about-text {
+  max-width: 450px;
+}

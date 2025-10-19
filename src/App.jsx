@@ -8,7 +8,7 @@ function App() {
       <Route element={<PageShell />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/venues/:id" element={<VenueDetailPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile/:name" element={<ProfilePage />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Route>
     </Routes>
