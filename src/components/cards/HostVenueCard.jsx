@@ -12,11 +12,11 @@ export default function HostVenueCard({ venue }) {
   const price = venue?.price ? `${venue.price} kr / night` : null;
 
   return (
-    <div className="host-venue-card list-group-item rounded-3 p-3 mb-2 d-flex align-items-center justify-content-between">
-      <div className="d-flex align-items-center">
-        <img src={image} alt={alt} className="me-3 rounded-3" />
+    <div className="host-venue-card list-group-item rounded-3 p-3 mb-2">
+      <div className="card-top">
+        <img src={image} alt={alt} className="rounded-3" />
 
-        <div className="venue-info">
+        <div className="venue-info mt-2 mt-md-0">
           <Link to={`/venues/${venue.id}`} className="h5 mb-1">
             {venue?.name || 'Untitled venue'}
           </Link>
@@ -38,7 +38,7 @@ export default function HostVenueCard({ venue }) {
         </div>
       </div>
 
-      <div className="ms-3 d-flex flex-column align-items-end justify-content-end">
+      <div className="card-action mt-2 mt-md-0">
         <button className="btn btn-outline-secondary btn-sm">Manage</button>
       </div>
     </div>

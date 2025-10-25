@@ -4,8 +4,12 @@ import { useAuth } from '../context/auth/useAuth';
 import { getProfile } from '../api/profiles';
 import Spinner from '../components/ui/Spinner';
 import EmptyState from '../components/ui/EmptyState';
-import { ProfileAbout, ProfileStatsRow } from '../components/profile';
-import ProfileActivity from '../components/profile/ProfileActivity';
+import {
+  ProfileBanner,
+  ProfileStatsRow,
+  ProfileInfo,
+  ProfileActivity,
+} from '../components/profile';
 
 export default function ProfilePage() {
   const { isAuthenticated, user: authUser } = useAuth();
@@ -64,8 +68,16 @@ export default function ProfilePage() {
 
   return (
     <div className="container py-4">
-      <ProfileAbout profile={profile} isOwnProfile={isOwnProfile} />
-      <ProfileStatsRow profile={profile} />
+      <ProfileBanner profile={profile} />
+      <div className="row g-3 align-items-start">
+        <div className="col-12 col-md-6">
+          <ProfileInfo profile={profile} isOwnProfile={isOwnProfile} />
+        </div>
+        <div className="col-12 col-md-6">
+          <ProfileStatsRow profile={profile} />
+        </div>
+      </div>
+
       <ProfileActivity profile={profile} isOwnProfile={isOwnProfile} />
     </div>
   );

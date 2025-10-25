@@ -1,7 +1,6 @@
 import BannerImage from './BannerImage';
-import ProfileInfo from './ProfileInfo';
 
-export default function ProfileAbout({ profile, isOwnProfile }) {
+export default function ProfileBanner({ profile }) {
   const bannerUrl =
     profile?.banner?.url ||
     'https://placehold.co/1000x200/cccccc/ffffff?text=Banner';
@@ -10,7 +9,6 @@ export default function ProfileAbout({ profile, isOwnProfile }) {
   return (
     <section aria-label="Profile banner" className="position-relative mb-4">
       <BannerImage bannerUrl={bannerUrl} bannerAlt={bannerAlt} />
-      <ProfileInfo profile={profile} isOwnProfile={isOwnProfile} />
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import Icon from '../ui/Icon';
+import { getSafeCount } from '../../utils/profileUtils';
 
 function StatCard({ icon, label, value }) {
   return (
@@ -15,22 +16,15 @@ function StatCard({ icon, label, value }) {
 export default function ProfileStatsRow({ profile }) {
   const isHost = !!profile?.venueManager;
 
-  const bookingsCount =
-    profile?._count?.bookings ?? profile?.bookings?.length ?? 0;
-  const venuesCount = profile?._count?.venues ?? profile?.venues?.length ?? 0;
+  const bookingsCount = getSafeCount(profile, 'bookings');
+  const venuesCount = getSafeCount(profile, 'venues');
 
   return (
-    <section className="mt-4" aria-label="Profile statistics">
-      <div className="row g-3 justify-content-center">
-        <div className="col-6 col-md-4 col-lg-3">
-          <StatCard icon="calendar" label="Bookings" value={bookingsCount} />
-        </div>
+    <section className=" profile-stats mt-4" aria-label="Profile statistics">
+      <div className="d-flex flex-wrap flex-md-column align-items-center align-items-md-start gap-3">
+        <StatCard icon="calendar" label="Bookings" value={bookingsCount} />
 
-        {isHost && (
-          <div className="col-6 col-md-4 col-lg-3">
-            <StatCard icon="home" label="Venues" value={venuesCount} />
-          </div>
-        )}
+        {isHost && <StatCard icon="home" label="Venues" value={venuesCount} />}
       </div>
     </section>
   );

@@ -6,12 +6,23 @@
   background-repeat: no-repeat;
 }
 
-.profile-avatar {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
+.profile-info {
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  @media (min-width: 768px) {
+    text-align: left;
+    .profile-avatar {
+      margin-left: 0;
+    }
+  }
 }
 
-.about-text {
-  max-width: 450px;
+.profile-stats {
+  .stat-card {
+    width: 100%;
+  }
 }

@@ -2,7 +2,7 @@ export default function ProfileInfo({ profile, isOwnProfile }) {
   const isHost = !!profile?.venueManager;
   const badgeClass = isHost
     ? 'badge text-bg-secondary'
-    : 'badge badge-holidaze';
+    : 'badge text-bg-primary';
 
   const avatarUrl =
     profile?.avatar?.url ||
@@ -13,14 +13,14 @@ export default function ProfileInfo({ profile, isOwnProfile }) {
   const bio = profile?.bio?.trim() || 'No bio added yet.';
 
   return (
-    <div className="profile-info text-center mt-3">
+    <div className="profile-info text-center text-md-start mt-3">
       <img
         src={avatarUrl}
         alt={avatarAlt}
-        className="profile-avatar rounded-circle mb-3"
+        className="profile-avatar rounded-circle mx-auto mx-md-0 mb-3"
       />
 
-      <div className="d-flex justify-content-center align-items-center gap-3 mb-1 mt-3">
+      <div className="d-flex flex-column flex-md-row align-items-center align-items-md-start gap-2">
         <h1 className="h5 mb-0">{profile?.name || 'User'}</h1>
         <span className={badgeClass}>{isHost ? 'Host' : 'Guest'}</span>
       </div>
@@ -29,7 +29,7 @@ export default function ProfileInfo({ profile, isOwnProfile }) {
         {profile?.email || 'Email not available'}
       </div>
 
-      <div className="mt-3 about-text mx-auto">
+      <div className="mt-3 about-text">
         <h2 className="h6 mb-1">About</h2>
         <p className="text-muted mb-0">{bio}</p>
       </div>

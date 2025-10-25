@@ -1,59 +1,51 @@
 import HostVenueCard from '../cards/HostVenueCard';
-import MyBookingCard from '../cards/MyBookingsCard';
-import ProfileList from './ProfileList';
+// import MyBookingCard from '../cards/MyBookingsCard';
+// import ProfileList from './ProfileList';
+import ProfileBookingList from './ProfileBookingList';
+import { getSafeCount } from '../../utils/profileUtils';
 
 export default function ProfileActivity({ profile, isOwnProfile }) {
   const isHost = !!profile?.venueManager;
-
-  const bookingsCount =
-    profile?._count?.bookings ?? profile?.bookings?.length ?? 0;
-  const venuesCount = profile?._count?.venues ?? profile?.venues?.length ?? 0;
-
-  const hasBookings = bookingsCount > 0;
+  const venuesCount = getSafeCount(profile, 'venues');
   const hasVenues = venuesCount > 0;
 
   return (
-    <section className="mt-4" aria-label="Profile activity">
-      {isHost && (
-        <div className="mb-5">
-          <h3 className="h5 d-flex mb-2">My Venues</h3>
-
-          {hasVenues ? (
-            <ProfileList>
-              {profile.venues.map((venue) => (
-                <HostVenueCard key={venue.id} venue={venue} />
-              ))}
-            </ProfileList>
-          ) : (
-            <div className="mt-2">
-              <p className="text-muted small mb-3">No venues yet</p>
-
-              {isOwnProfile && (
-                <button type="button" className="btn btn-primary btn-sm">
-                  Create Venue
-                </button>
-              )}
-            </div>
-          )}
-        </div>
-      )}
-
-      <div>
-        <h3 className="h5 d-flex align-items-center gap-2 mb-2">My Bookings</h3>
-        {hasBookings ? (
-          <ProfileList>
-            {profile.bookings.map((booking) => (
-              <MyBookingCard key={booking.id} booking={booking} />
-            ))}
-          </ProfileList>
-        ) : (
-          <div>
-            <p className="text-muted small mb-3">
-              No bookings yet. Start exploring!
-            </p>
+    <section className="profile-activity mt-4" aria-label="Profile activity">
+      {isHost ? (
+        <div className="row g-4">
+          <div className="col-12 col-lg-6">
+            <h3 className="h5 mb-2">My Venues</h3>
+            {hasVenues ? (
+              <div className="list-group">
+                {profile.venues.map((venue) => (
+                  <HostVenueCard key={venue.id} venue={venue} />
+                ))}
+              </div>
+            ) : (
+              <div className="mt-2">
+                <p className="text-muted small mb-3">No venues yet</p>
+                {isOwnProfile && (
+                  <button type="button" className="btn btn-primary btn-sm">
+                    Create Venue
+                  </button>
+                )}
+              </div>
+            )}
           </div>
-        )}
-      </div>
+
+          <div className="col-12 col-lg-6">
+            <ProfileBookingList
+              bookings={profile.bookings}
+              bookingsCount={getSafeCount(profile, 'bookings')}
+            />
+          </div>
+        </div>
+      ) : (
+        <ProfileBookingList
+          bookings={profile.bookings}
+          bookingsCount={getSafeCount(profile, 'bookings')}
+        />
+      )}
     </section>
   );
 }

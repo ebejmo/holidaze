@@ -18,12 +18,12 @@ export default function MyBookingCard({ booking }) {
   return (
     <Link
       to={`/venues/${venue?.id}`}
-      className="list-group-item booking-card rounded-3 p-3 mb-2 d-flex align-items-center justify-content-between"
+      className="list-group-item booking-card rounded-3 p-3 mb-2"
     >
-      <div className="d-flex align-items-center">
-        <img src={image} alt={alt} className="me-3 rounded-3" />
+      <div className="card-top">
+        <img src={image} alt={alt} className="rounded-3" />
 
-        <div className="booking-info">
+        <div className="booking-info mt-2 mt-md-0">
           <h5 className="mb-1">{title}</h5>
           <div className="small-meta text-muted small">
             <Icon name="calendar" size="sm" className="text-secondary" />
@@ -46,7 +46,7 @@ export default function MyBookingCard({ booking }) {
         </div>
       </div>
 
-      <div className="ms-3">
+      <div className="card-action mt-2 mt-md-0">
         <span className={`badge-holidaze badge ${statusClass}`}>
           {statusLabel}
         </span>
