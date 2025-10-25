@@ -1,7 +1,7 @@
 import BannerImage from './BannerImage';
 import ProfileInfo from './ProfileInfo';
 
-export default function ProfileBanner({ profile, isOwnProfile }) {
+export default function ProfileAbout({ profile, isOwnProfile }) {
   const bannerUrl =
     profile?.banner?.url ||
     'https://placehold.co/1000x200/cccccc/ffffff?text=Banner';

@@ -4,9 +4,10 @@ import { useAuth } from '../context/auth/useAuth';
 import { getProfile } from '../api/profiles';
 import Spinner from '../components/ui/Spinner';
 import EmptyState from '../components/ui/EmptyState';
-import { ProfileBanner } from '../components/profile';
+import { ProfileAbout, ProfileStatsRow } from '../components/profile';
+import ProfileActivity from '../components/profile/ProfileActivity';
 
-function ProfilePage() {
+export default function ProfilePage() {
   const { isAuthenticated, user: authUser } = useAuth();
   const { name: routeName } = useParams();
   const targetName = routeName || authUser.name;
@@ -37,6 +38,14 @@ function ProfilePage() {
     };
   }, [targetName]);
 
+  useEffect(() => {
+    if (profile?.name) {
+      document.title = `${profile.name} | Holidaze`;
+    } else {
+      document.title = 'Profile | Holidaze';
+    }
+  }, [profile?.name]);
+
   if (!isAuthenticated || !authUser) {
     return (
       <EmptyState
@@ -55,9 +64,9 @@ function ProfilePage() {
 
   return (
     <div className="container py-4">
-      <ProfileBanner profile={profile} isOwnProfile={isOwnProfile} />
+      <ProfileAbout profile={profile} isOwnProfile={isOwnProfile} />
+      <ProfileStatsRow profile={profile} />
+      <ProfileActivity profile={profile} isOwnProfile={isOwnProfile} />
     </div>
   );
 }
-
-export default ProfilePage;

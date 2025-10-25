@@ -40,3 +40,39 @@
     font-weight: $fw-semibold;
   }
 }
+
+.booking-card {
+  @extend .venue-card;
+
+  img {
+    width: 100px;
+    height: 80px;
+    object-fit: cover;
+  }
+
+  .booking-info,
+  .venue-info {
+    flex: 1;
+  }
+
+  .small-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+    align-items: center;
+  }
+
+  .badge {
+    &.completed {
+      background-color: $border-color;
+      color: $text-muted;
+    }
+  }
+}
+
+.host-venue-card {
+  @extend .booking-card;
+  .btn {
+    padding: 0.25rem 0.75rem;
+  }
+}

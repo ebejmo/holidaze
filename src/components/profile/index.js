@@ -1,1 +1,2 @@
-export { default as ProfileBanner } from './ProfileBanner';
+export { default as ProfileAbout } from './ProfileAbout';
+export { default as ProfileStatsRow } from './ProfileStatsRow';
