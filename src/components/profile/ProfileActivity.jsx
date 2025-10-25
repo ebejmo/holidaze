@@ -1,10 +1,11 @@
+import { useAppModals } from '../../hooks/useAppModals';
 import HostVenueCard from '../cards/HostVenueCard';
-// import MyBookingCard from '../cards/MyBookingsCard';
-// import ProfileList from './ProfileList';
 import ProfileBookingList from './ProfileBookingList';
 import { getSafeCount } from '../../utils/profileUtils';
 
 export default function ProfileActivity({ profile, isOwnProfile }) {
+  const { openCreateVenueModal } = useAppModals();
+
   const isHost = !!profile?.venueManager;
   const venuesCount = getSafeCount(profile, 'venues');
   const hasVenues = venuesCount > 0;
@@ -25,7 +26,11 @@ export default function ProfileActivity({ profile, isOwnProfile }) {
               <div className="mt-2">
                 <p className="text-muted small mb-3">No venues yet</p>
                 {isOwnProfile && (
-                  <button type="button" className="btn btn-primary btn-sm">
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-sm"
+                    onClick={openCreateVenueModal}
+                  >
                     Create Venue
                   </button>
                 )}
