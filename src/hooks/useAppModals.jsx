@@ -9,10 +9,10 @@ export function useAppModals() {
     openModal(<AuthModal initialMode={mode} />, {});
   }
 
-  function openCreateVenueModal() {
-    openModal(<CreateVenueModal />, {
-      title: 'create venue',
-      size: 'lg',
+  function openCreateVenueModal(profile) {
+    openModal(<CreateVenueModal profile={profile} />, {
+      title: 'Create venue',
+      size: 'md',
     });
   }
 

@@ -44,67 +44,6 @@ export default function AuthFormLogin({ onSwitch }) {
   }
 
   return (
-    // <form onSubmit={handleSubmit(onSubmit)} noValidate>
-    //   <div className="mb-3">
-    //     <label className="form-label">Email</label>
-    //     <input
-    //       {...register('email')}
-    //       type="email"
-    //       className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-    //       disabled={isSubmitting || redirecting}
-    //     />
-    //     {errors.email && (
-    //       <p className="text-danger small">{errors.email.message}</p>
-    //     )}
-    //   </div>
-
-    //   <div className="mb-3">
-    //     <label className="form-label">Password</label>
-    //     <input
-    //       type="password"
-    //       {...register('password')}
-    //       className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-    //       disabled={isSubmitting || redirecting}
-    //     />
-    //     {errors.password && (
-    //       <p className="text-danger small">{errors.password.message}</p>
-    //     )}
-    //   </div>
-
-    //   <button
-    //     type="submit"
-    //     className="btn btn-primary w-100"
-    //     disabled={isSubmitting || redirecting}
-    //   >
-    //     {isSubmitting
-    //       ? 'Logging in...'
-    //       : redirecting
-    //         ? 'Redirecting...'
-    //         : 'Log in'}
-    //   </button>
-
-    //   {redirecting && (
-    //     <div
-    //       className="d-flex align-items-center justify-content-center gap-2 mt-3 small text-muted"
-    //       aria-live="polite"
-    //     >
-    //       <Spinner size="sm" />
-    //       <span>Redirecting to your profile…</span>
-    //     </div>
-    //   )}
-
-    //   <p className="text-center small mt-3 mb-0">
-    //     No account?{' '}
-    //     <button
-    //       type="button"
-    //       className="btn btn-link btn-link-inherit small text-info align-baseline"
-    //       onClick={onSwitch}
-    //       disabled={isSubmitting || redirecting}
-    //     >
-    //       Register here
-    //     </button>
-    //   </p>
-    // </form>
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <FormField
         label="Email"

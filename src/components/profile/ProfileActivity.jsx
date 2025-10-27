@@ -29,7 +29,7 @@ export default function ProfileActivity({ profile, isOwnProfile }) {
                   <button
                     type="button"
                     className="btn btn-primary btn-sm"
-                    onClick={openCreateVenueModal}
+                    onClick={() => openCreateVenueModal(profile)}
                   >
                     Create Venue
                   </button>
