@@ -4,7 +4,9 @@ import { createVenueSchema } from '../../schemas/createVenueSchema';
 import { createVenue } from '../../api/venues';
 import { useToast } from '../../context/toast/useToast';
 import { useModal } from '../../context/modal/useModal';
-import FormField from './FormField';
+import HostUpdateFormCore from './HostUpdateFormCore';
+import HostUpdateFormMedia from './HostUpdateFormMedia';
+import HostUpdateFormAmenities from './HostUpdateFormAmenities';
 
 export default function CreateVenueForm({ profile, onSuccess }) {
   const { addToast } = useToast();
@@ -23,6 +25,13 @@ export default function CreateVenueForm({ profile, onSuccess }) {
       description: '',
       price: '',
       maxGuests: '1',
+      media1: '',
+      media2: '',
+      media3: '',
+      wifi: false,
+      parking: false,
+      breakfast: false,
+      pets: false,
     },
   });
 
@@ -32,11 +41,23 @@ export default function CreateVenueForm({ profile, onSuccess }) {
         throw new Error('Only hosts can create venues');
       }
 
+      const media = [];
+      if (values.media1) media.push({ url: values.media1, alt: '' });
+      if (values.media2) media.push({ url: values.media2, alt: '' });
+      if (values.media3) media.push({ url: values.media3, alt: '' });
+
       const payload = {
         name: values.name.trim(),
         description: values.description.trim(),
         price: Number(values.price),
         maxGuests: Number(values.maxGuests),
+        meta: {
+          wifi: !!values.wifi,
+          parking: !!values.parking,
+          breakfast: !!values.breakfast,
+          pets: !!values.pets,
+        },
+        media: media,
       };
 
       const createdVenue = await createVenue(payload);
@@ -51,74 +72,24 @@ export default function CreateVenueForm({ profile, onSuccess }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <FormField
-        label="Name"
-        name="name"
-        register={(n) => ({
-          ...register(n),
-          onChange: (e) => {
-            register(n).onChange(e);
-          },
-        })}
-        error={errors.name}
-        disabled={isSubmitting}
-        placeholder="House at the beach"
-      />
-
-      <FormField
-        label="Description"
-        name="description"
-        as="textarea"
-        rows="3"
+      <HostUpdateFormCore
         register={register}
-        error={errors.description}
-        disabled={isSubmitting}
-        placeholder="Describe your venue"
+        errors={errors}
+        isSubmitting={isSubmitting}
+      />
+      <HostUpdateFormMedia
+        register={register}
+        errors={errors}
+        isSubmitting={isSubmitting}
+      />
+      <HostUpdateFormAmenities
+        register={register}
+        isSubmitting={isSubmitting}
       />
 
-      <div className="row">
-        <div className="col-6">
-          <FormField
-            label="Price per night"
-            name="price"
-            type="number"
-            inputMode="decimal"
-            min="0"
-            step="1"
-            register={register}
-            error={errors.price}
-            disabled={isSubmitting}
-            helpText="Enter price per night"
-          />
-        </div>
-
-        <div className="col-6">
-          <FormField
-            label="Max guests"
-            name="maxGuests"
-            type="number"
-            inputMode="numeric"
-            min="1"
-            max="12"
-            step="1"
-            register={register}
-            error={errors.maxGuests}
-            disabled={isSubmitting}
-          />
-        </div>
-      </div>
-
-      <button
-        type="submit"
-        className="btn btn-primary w-100"
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? 'Creating' : 'Create Venue'}
+      <button className="btn btn-primary w-100">
+        {isSubmitting ? 'Creating...' : 'Create Venue'}
       </button>
-
-      <p className="text-muted small mt-2 mb-0">
-        Add rest of stuff once we get this going
-      </p>
     </form>
   );
 }

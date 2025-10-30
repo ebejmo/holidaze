@@ -6,17 +6,20 @@ export const createVenueSchema = yup.object({
     .trim()
     .min(2, 'Venue name must be at least 2 characters')
     .required('Venue name is required'),
+
   description: yup
     .string()
     .trim()
     .min(10, 'Please describe the venue (min 10 characters)')
     .required('Description is required'),
+
   price: yup
     .number()
     .typeError('Price must be number')
     .min(0, 'Price can not be negative')
     .max(1000000, '1 million is the highest price we charge')
     .required('Price is required'),
+
   maxGuests: yup
     .number()
     .typeError('Max guests must be a number')
@@ -24,4 +27,13 @@ export const createVenueSchema = yup.object({
     .min(1, 'At least 1 guest')
     .max(12, 'No venues can host more than 12 people')
     .required('Max guests is required'),
+
+  media1: yup.string().url('Must be a valid URL').optional(),
+  media2: yup.string().url('Must be a valid URL').optional(),
+  media3: yup.string().url('Must be a valid URL').optional(),
+
+  wifi: yup.boolean().optional(),
+  parking: yup.boolean().optional(),
+  breakfast: yup.boolean().optional(),
+  pets: yup.boolean().optional(),
 });

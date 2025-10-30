@@ -12,7 +12,7 @@ export default function CreateVenueModal({ profile }) {
   if (!profile?.venueManager) {
     return (
       <div className="p-4 text-center">
-        <p className="text.muted mb-0">You must be a host to create a venue</p>
+        <p className="text-muted mb-0">You must be a host to create a venue</p>
       </div>
     );
   }
