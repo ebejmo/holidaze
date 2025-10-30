@@ -11,8 +11,12 @@ export default function VenueCard({ venue }) {
   const imageAlt =
     media && media.length > 0 ? media[0].alt || name : `${name} image`;
 
-  const city = location?.city?.trim() || 'N/A';
-  const country = location?.country?.trim() || 'N/A';
+  const city = venue?.location?.city?.trim();
+  const country = venue?.location?.country?.trim();
+  const locationText =
+    city && country
+      ? `${city}, ${country}`
+      : city || country || 'Location unknown';
 
   return (
     <div className="col-6 col col-md-4 col-lg-3 mb-4">
@@ -30,9 +34,7 @@ export default function VenueCard({ venue }) {
             </span>
           )}
           <h5 className="card-title mb-2">{name}</h5>
-          <p className="card-text mb-2">
-            {city}, {country}
-          </p>
+          <p className="card-text mb-2">{locationText}</p>
           {price !== undefined && <p className="price">{price} kr / night</p>}
         </div>
       </Link>

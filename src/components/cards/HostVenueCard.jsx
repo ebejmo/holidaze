@@ -6,8 +6,12 @@ export default function HostVenueCard({ venue }) {
   const image =
     venue?.media?.[0]?.url || 'https://placehold.co/100x80?text=Venue';
   const alt = venue?.media?.[0]?.alt || venue?.name || 'Venue image';
-  const location =
-    venue?.location?.city || venue?.location?.address || 'Unknown location';
+  const city = venue?.location?.city?.trim();
+  const country = venue?.location?.country?.trim();
+  const locationText =
+    city && country
+      ? `${city}, ${country}`
+      : city || country || 'Location unknown';
   const bookingsCount = venue?._count?.bookings ?? venue?.bookings?.length ?? 0;
   const price = venue?.price ? `${venue.price} kr / night` : null;
 
@@ -23,7 +27,7 @@ export default function HostVenueCard({ venue }) {
 
           <div className="small-meta text-muted small">
             <Icon name="location" size="sm" className="text-secondary" />
-            <span>{location}</span>
+            <span>{locationText}</span>
 
             <Icon name="users" size="sm" className="text-secondary" />
             <span>{bookingsCount} bookings</span>

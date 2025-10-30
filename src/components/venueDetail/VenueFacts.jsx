@@ -3,7 +3,9 @@ import Icon from '../ui/Icon';
 export default function VenueFacts({ location, price, maxGuests }) {
   const { address, city, country } = location || {};
   const locationText =
-    city && country ? `${city}, ${country}` : 'Location unknown';
+    city && country
+      ? `${city}, ${country}`
+      : city || country || 'Location unknown';
 
   return (
     <section className="mb-4 venue-facts" aria-label="Venue facts">
