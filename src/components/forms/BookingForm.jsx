@@ -120,7 +120,7 @@ export default function BookingForm({
 
       <div className="d-flex justify-content-between align-items-center mb-3">
         <span className="fw-semibold">Total</span>
-        <span className="fw-semibold">${total.toFixed(2)}</span>
+        <span className="fw-semibold">{total.toFixed(2)} kr</span>
       </div>
 
       <button
