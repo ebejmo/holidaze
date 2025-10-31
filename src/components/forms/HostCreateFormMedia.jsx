@@ -1,6 +1,6 @@
 import FormField from './FormField';
 
-export default function HostUpdateFormMedia({
+export default function HostCreateFormMedia({
   register,
   errors,
   isSubmitting,

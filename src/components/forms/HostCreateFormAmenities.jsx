@@ -5,7 +5,7 @@ const AMENITIES = [
   { key: 'pets', label: 'Pets' },
 ];
 
-export default function HostUpdateFormAmenities({ register, isSubmitting }) {
+export default function HostCreateFormAmenities({ register, isSubmitting }) {
   return (
     <>
       <h4 className="h6 mb-2">Amenities</h4>

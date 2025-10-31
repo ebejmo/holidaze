@@ -78,3 +78,10 @@ small,
   height: 32px;
   object-fit: cover;
 }
+
+.badge-holidaze {
+  background-color: $accent;
+  color: $dark;
+  font-weight: $fw-semibold;
+  align-self: flex-start;
+}

@@ -28,6 +28,10 @@ export const createVenueSchema = yup.object({
     .max(12, 'No venues can host more than 12 people')
     .required('Max guests is required'),
 
+  address: yup.string().trim().max(120, 'Address is too long').optional(),
+  city: yup.string().trim().max(60, 'City name is too long').optional(),
+  country: yup.string().trim().max(60, 'Country name too long').optional(),
+
   media1: yup.string().url('Must be a valid URL').optional(),
   media2: yup.string().url('Must be a valid URL').optional(),
   media3: yup.string().url('Must be a valid URL').optional(),

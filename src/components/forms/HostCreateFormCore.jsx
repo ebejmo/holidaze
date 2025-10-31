@@ -1,8 +1,10 @@
 import FormField from './FormField';
 
-export default function HostUpdateFormCore({ register, errors, isSubmitting }) {
+export default function HostCreateFormCore({ register, errors, isSubmitting }) {
   return (
     <>
+      <h4 className="h6 mb-2">Venue details</h4>
+
       <FormField
         label="Name"
         name="name"
@@ -11,6 +13,40 @@ export default function HostUpdateFormCore({ register, errors, isSubmitting }) {
         disabled={isSubmitting}
         placeholder="Your venue name"
       />
+
+      <div className="row">
+        <div className="col-12">
+          <FormField
+            label="Address"
+            name="address"
+            register={register}
+            error={errors.address}
+            disabled={isSubmitting}
+            placeholder="Street or road"
+          />
+        </div>
+        <div className="col-6">
+          <FormField
+            label="City"
+            name="city"
+            register={register}
+            error={errors.city}
+            disabled={isSubmitting}
+            placeholder="City"
+          />
+        </div>
+        <div className="col-6">
+          <FormField
+            label="Country"
+            name="country"
+            register={register}
+            error={errors.country}
+            disabled={isSubmitting}
+            placeholder="Country"
+          />
+        </div>
+      </div>
+
       <FormField
         label="Description"
         name="description"
@@ -21,6 +57,7 @@ export default function HostUpdateFormCore({ register, errors, isSubmitting }) {
         disabled={isSubmitting}
         placeholder="Describe your venue"
       />
+
       <div className="row">
         <div className="col-6">
           <FormField
@@ -32,6 +69,7 @@ export default function HostUpdateFormCore({ register, errors, isSubmitting }) {
             disabled={isSubmitting}
           />
         </div>
+
         <div className="col-6">
           <FormField
             label="Max guests"

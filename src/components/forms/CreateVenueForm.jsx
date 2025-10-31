@@ -4,9 +4,9 @@ import { createVenueSchema } from '../../schemas/createVenueSchema';
 import { createVenue } from '../../api/venues';
 import { useToast } from '../../context/toast/useToast';
 import { useModal } from '../../context/modal/useModal';
-import HostUpdateFormCore from './HostUpdateFormCore';
-import HostUpdateFormMedia from './HostUpdateFormMedia';
-import HostUpdateFormAmenities from './HostUpdateFormAmenities';
+import HostCreateFormCore from './HostCreateFormCore';
+import HostCreateFormMedia from './HostCreateFormMedia';
+import HostCreateFormAmenities from './HostCreateFormAmenities';
 
 export default function CreateVenueForm({ profile, onSuccess }) {
   const { addToast } = useToast();
@@ -22,6 +22,9 @@ export default function CreateVenueForm({ profile, onSuccess }) {
     mode: 'onTouched',
     defaultValues: {
       name: '',
+      address: '',
+      city: '',
+      country: '',
       description: '',
       price: '',
       maxGuests: '1',
@@ -41,10 +44,15 @@ export default function CreateVenueForm({ profile, onSuccess }) {
         throw new Error('Only hosts can create venues');
       }
 
-      const media = [];
-      if (values.media1) media.push({ url: values.media1, alt: '' });
-      if (values.media2) media.push({ url: values.media2, alt: '' });
-      if (values.media3) media.push({ url: values.media3, alt: '' });
+      const media = [values.media1, values.media2, values.media3]
+        .filter(Boolean)
+        .map((url) => ({ url: url.trim(), alt: '' }));
+
+      const location = {
+        address: values.address?.trim() || '',
+        city: values.city?.trim() || '',
+        country: values.country?.trim() || '',
+      };
 
       const payload = {
         name: values.name.trim(),
@@ -57,7 +65,8 @@ export default function CreateVenueForm({ profile, onSuccess }) {
           breakfast: !!values.breakfast,
           pets: !!values.pets,
         },
-        media: media,
+        media,
+        location,
       };
 
       const createdVenue = await createVenue(payload);
@@ -72,17 +81,17 @@ export default function CreateVenueForm({ profile, onSuccess }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <HostUpdateFormCore
+      <HostCreateFormCore
         register={register}
         errors={errors}
         isSubmitting={isSubmitting}
       />
-      <HostUpdateFormMedia
+      <HostCreateFormMedia
         register={register}
         errors={errors}
         isSubmitting={isSubmitting}
       />
-      <HostUpdateFormAmenities
+      <HostCreateFormAmenities
         register={register}
         isSubmitting={isSubmitting}
       />
