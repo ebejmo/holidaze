@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import Icon from '../ui/Icon';
+import { handleImageError } from '../../utils/handleImageError';
 
 // re visit when create venue is up and running (styles)
 export default function HostVenueCard({ venue }) {
   const image =
-    venue?.media?.[0]?.url || 'https://placehold.co/100x80?text=Venue';
+    venue?.media?.[0]?.url || 'https://placehold.co/500x500?text=Venue';
   const alt = venue?.media?.[0]?.alt || venue?.name || 'Venue image';
   const city = venue?.location?.city?.trim();
   const country = venue?.location?.country?.trim();
@@ -18,10 +19,18 @@ export default function HostVenueCard({ venue }) {
   return (
     <div className="host-venue-card list-group-item rounded-3 p-3 mb-2">
       <div className="card-top">
-        <img src={image} alt={alt} className="rounded-3" />
+        <img
+          src={image}
+          alt={alt}
+          className="rounded-3"
+          onError={handleImageError}
+        />
 
         <div className="venue-info mt-2 mt-md-0">
-          <Link to={`/venues/${venue.id}`} className="h5 mb-1">
+          <Link
+            to={`/venues/${venue.id}`}
+            className="h5 mb-1 text-decoration-none"
+          >
             {venue?.name || 'Untitled venue'}
           </Link>
 

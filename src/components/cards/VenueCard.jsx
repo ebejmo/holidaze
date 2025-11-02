@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { getRatingLabel } from '../../utils/ratingUtils';
+import { handleImageError } from '../../utils/handleImageError';
 
 export default function VenueCard({ venue }) {
-  const { id, name, media, location, price, rating } = venue;
+  const { id, name, media, price, rating } = venue;
 
   const imageUrl =
     media && media.length > 0
@@ -25,7 +26,12 @@ export default function VenueCard({ venue }) {
         className="card h-100 text-decoration-none text-dark venue-card"
       >
         <div className="card-img-top-wrapper">
-          <img src={imageUrl} alt={imageAlt} className="card-img-top" />
+          <img
+            src={imageUrl}
+            alt={imageAlt}
+            className="card-img-top"
+            onError={handleImageError}
+          />
         </div>
         <div className="card-body">
           {typeof rating === 'number' && (

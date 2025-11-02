@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Icon from '../ui/Icon';
+import { handleImageError } from '../../utils/handleImageError';
 
 export default function MyBookingCard({ booking }) {
   const venue = booking?.venue;
@@ -21,7 +22,12 @@ export default function MyBookingCard({ booking }) {
       className="list-group-item booking-card rounded-3 p-3 mb-2"
     >
       <div className="card-top">
-        <img src={image} alt={alt} className="rounded-3" />
+        <img
+          src={image}
+          alt={alt}
+          className="rounded-3"
+          onError={handleImageError}
+        />
 
         <div className="booking-info mt-2 mt-md-0">
           <h5 className="mb-1">{title}</h5>

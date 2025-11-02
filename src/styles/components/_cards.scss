@@ -120,3 +120,13 @@
     padding: 0.25rem 0.75rem;
   }
 }
+
+.host-booking-card {
+  @extend .venue-card;
+
+  img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+  }
+}

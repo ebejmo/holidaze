@@ -18,7 +18,7 @@ export default function HostCreateFormMedia({
           register={register}
           error={errors[`media${i}`]}
           disabled={isSubmitting}
-          placeholder="https://bejjleif.com.jpg"
+          placeholder="https://url.com/image.jpg"
         />
       ))}
     </>
