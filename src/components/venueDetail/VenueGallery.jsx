@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Icon from '../ui/Icon';
+import { handleImageError } from '../../utils/handleImageError';
 
 function SingleImageDisplay({ image, title }) {
   return (
@@ -7,6 +8,7 @@ function SingleImageDisplay({ image, title }) {
       src={image.url}
       alt={image.alt || `${title} image`}
       className="img-fluid w-100 rounded-2 venue-gallery_image"
+      onError={handleImageError}
     />
   );
 }
@@ -24,6 +26,7 @@ function ImageCarousel({ images, title }) {
               src={item.url}
               alt={item.alt || `${title} image ${index + 1}`}
               className="d-block w-100 img-fluid venue-gallery_image"
+              onError={handleImageError}
             />
           </div>
         ))}
@@ -58,7 +61,7 @@ export default function VenueGallery({ media = [], title }) {
       ? media
       : [
           {
-            url: 'https://placehold.co/600x400/orange/white?text=Holidaze',
+            url: 'https://placehold.co/500x500?text=Holidaze',
             alt: `${title} image`,
           },
         ];
