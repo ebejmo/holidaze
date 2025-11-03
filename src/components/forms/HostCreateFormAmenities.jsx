@@ -1,5 +1,5 @@
 const AMENITIES = [
-  { key: 'Wifi', label: 'Wi-Fi' },
+  { key: 'wifi', label: 'Wi-Fi' },
   { key: 'parking', label: 'Parking' },
   { key: 'breakfast', label: 'Breakfast' },
   { key: 'pets', label: 'Pets' },
