@@ -16,6 +16,7 @@ export default function ProfileActivity({ profile, isOwnProfile }) {
         <div className="row g-4">
           <div className="col-12 col-lg-6">
             <h3 className="h5 mb-2">My Venues</h3>
+
             {hasVenues ? (
               <div>
                 <div className="list-group">
@@ -23,6 +24,7 @@ export default function ProfileActivity({ profile, isOwnProfile }) {
                     <HostVenueCard key={venue.id} venue={venue} />
                   ))}
                 </div>
+
                 <div className="mt-3">
                   {isOwnProfile && (
                     <button
@@ -38,6 +40,7 @@ export default function ProfileActivity({ profile, isOwnProfile }) {
             ) : (
               <div className="mt-2">
                 <p className="text-muted small mb-3">No venues yet</p>
+
                 {isOwnProfile && (
                   <button
                     type="button"

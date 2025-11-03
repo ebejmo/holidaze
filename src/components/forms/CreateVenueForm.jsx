@@ -8,7 +8,7 @@ import HostCreateFormCore from './HostCreateFormCore';
 import HostCreateFormMedia from './HostCreateFormMedia';
 import HostCreateFormAmenities from './HostCreateFormAmenities';
 
-export default function CreateVenueForm({ profile, onSuccess }) {
+export default function CreateVenueForm({ profile }) {
   const { addToast } = useToast();
   const { closeModal } = useModal();
 
@@ -69,11 +69,12 @@ export default function CreateVenueForm({ profile, onSuccess }) {
         location,
       };
 
-      const createdVenue = await createVenue(payload);
+      await createVenue(payload);
       addToast('Venue created successfully!', 'success');
       reset();
       closeModal();
-      onSuccess?.(createdVenue);
+      setTimeout(() => window.location.reload(), 800);
+      window.location.reload();
     } catch (error) {
       addToast(error.message || 'Could not create venue.', 'danger');
     }
