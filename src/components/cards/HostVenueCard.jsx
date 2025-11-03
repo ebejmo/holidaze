@@ -13,7 +13,6 @@ export default function HostVenueCard({ venue }) {
     city && country
       ? `${city}, ${country}`
       : city || country || 'Location unknown';
-  const bookingsCount = venue?._count?.bookings ?? venue?.bookings?.length ?? 0;
   const price = venue?.price ? `${venue.price} kr / night` : null;
 
   return (
@@ -37,9 +36,6 @@ export default function HostVenueCard({ venue }) {
           <div className="small-meta text-muted small">
             <Icon name="location" size="sm" className="text-secondary" />
             <span>{locationText}</span>
-
-            <Icon name="users" size="sm" className="text-secondary" />
-            <span>{bookingsCount} bookings</span>
 
             {price && (
               <>
