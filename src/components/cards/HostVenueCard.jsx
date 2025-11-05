@@ -24,7 +24,7 @@ export default function HostVenueCard({ venue }) {
     }
   }
   const image =
-    venue?.media?.[0]?.url || 'https://placehold.co/500x500?text=Venue';
+    venue?.media?.[0]?.url || 'https://placehold.co/500x500?text=Holidaze';
   const alt = venue?.media?.[0]?.alt || venue?.name || 'Venue image';
   const city = venue?.location?.city?.trim();
   const country = venue?.location?.country?.trim();

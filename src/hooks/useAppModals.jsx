@@ -1,6 +1,6 @@
 import { useModal } from '../context/modal/useModal';
 import { AuthModal, CreateVenueModal } from '../components/modal';
-// add imports avatar modal create venue modal etc here
+import UpdateAvatarModal from '../components/modal/UpdateAvatarModal';
 
 export function useAppModals() {
   const { openModal, closeModal } = useModal();
@@ -16,9 +16,14 @@ export function useAppModals() {
     });
   }
 
+  function openUpdateAvatarModal() {
+    openModal(<UpdateAvatarModal />, {});
+  }
+
   return {
     openAuthModal,
     openCreateVenueModal,
+    openUpdateAvatarModal,
     closeModal,
   };
 }

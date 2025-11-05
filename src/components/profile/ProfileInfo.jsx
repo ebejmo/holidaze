@@ -1,4 +1,8 @@
+import { useAppModals } from '../../hooks/useAppModals';
+import { handleImageError } from '../../utils/handleImageError';
+
 export default function ProfileInfo({ profile, isOwnProfile }) {
+  const { openUpdateAvatarModal } = useAppModals();
   const isHost = !!profile?.venueManager;
   const badgeClass = isHost
     ? 'badge text-bg-secondary'
@@ -18,6 +22,7 @@ export default function ProfileInfo({ profile, isOwnProfile }) {
         src={avatarUrl}
         alt={avatarAlt}
         className="profile-avatar rounded-circle mx-auto mx-md-0 mb-3"
+        onError={handleImageError}
       />
 
       <div className="d-flex flex-column flex-md-row align-items-center align-items-md-start gap-2">
@@ -35,7 +40,12 @@ export default function ProfileInfo({ profile, isOwnProfile }) {
       </div>
 
       {isOwnProfile && (
-        <button className="btn btn-outline-secondary mt-3">Edit</button>
+        <button
+          className="btn btn-outline-secondary mt-3"
+          onClick={openUpdateAvatarModal}
+        >
+          Edit
+        </button>
       )}
     </div>
   );
