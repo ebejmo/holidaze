@@ -1,9 +1,28 @@
 import { Link } from 'react-router-dom';
 import Icon from '../ui/Icon';
 import { handleImageError } from '../../utils/handleImageError';
+import { useToast } from '../../context/toast/useToast';
+import { deleteVenue } from '../../api/venues';
 
 // re visit when create venue is up and running (styles)
 export default function HostVenueCard({ venue }) {
+  const { addToast } = useToast();
+
+  async function handleDeleteVenue() {
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete ${venue.name}?`
+    );
+    if (!confirmDelete) return;
+
+    try {
+      await deleteVenue(venue.id);
+      addToast('Venue deleted!', 'success');
+      setTimeout(() => window.location.reload(), 800);
+    } catch (err) {
+      addToast('Failed to delete venue.', 'danger');
+      console.log(err);
+    }
+  }
   const image =
     venue?.media?.[0]?.url || 'https://placehold.co/500x500?text=Venue';
   const alt = venue?.media?.[0]?.alt || venue?.name || 'Venue image';
@@ -47,8 +66,17 @@ export default function HostVenueCard({ venue }) {
         </div>
       </div>
 
-      <div className="card-action mt-2 mt-md-0">
-        <button className="btn btn-outline-secondary btn-sm">Manage</button>
+      {/* Fix button styles to be consistent over screen sizes */}
+      <div className="mt-3 d-flex flex-column flex-lg-row gap-2">
+        <button className="btn btn-outline-secondary btn-sm w-100 w-lg-auto flex-fill">
+          Manage
+        </button>
+        <button
+          onClick={handleDeleteVenue}
+          className="btn btn-danger btn-sm w-100 w-lg-auto flex-fill"
+        >
+          Delete
+        </button>
       </div>
     </div>
   );

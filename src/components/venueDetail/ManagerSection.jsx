@@ -1,8 +1,6 @@
 import { handleImageError } from '../../utils/handleImageError';
 
-export default function ManagerSection({ bookings = [], venueId }) {
-  //lets revisit this when create venue is created
-
+export default function ManagerSection({ bookings = [] }) {
   const hasBookings = bookings.length > 0;
 
   return (
@@ -40,13 +38,6 @@ export default function ManagerSection({ bookings = [], venueId }) {
           ))}
         </div>
       )}
-
-      <div className="d-flex flex-column flex-sm-row gap-3">
-        <button className="btn btn-outline-secondary flex-fill">
-          Manage Venue
-        </button>
-        <button className="btn btn-danger flex-fill">Delete Venue</button>
-      </div>
     </>
   );
 }
