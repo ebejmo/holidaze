@@ -1,6 +1,10 @@
 import { useModal } from '../context/modal/useModal';
-import { AuthModal, CreateVenueModal } from '../components/modal';
-import UpdateAvatarModal from '../components/modal/UpdateAvatarModal';
+import {
+  AuthModal,
+  CreateVenueModal,
+  UpdateVenueModal,
+  UpdateAvatarModal,
+} from '../components/modal';
 
 export function useAppModals() {
   const { openModal, closeModal } = useModal();
@@ -20,10 +24,18 @@ export function useAppModals() {
     openModal(<UpdateAvatarModal />, {});
   }
 
+  function openUpdateVenueModal(venue) {
+    openModal(<UpdateVenueModal venue={venue} />, {
+      title: `Update ${venue.name}`,
+      size: 'md',
+    });
+  }
+
   return {
     openAuthModal,
     openCreateVenueModal,
     openUpdateAvatarModal,
+    openUpdateVenueModal,
     closeModal,
   };
 }

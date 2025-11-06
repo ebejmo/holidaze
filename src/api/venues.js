@@ -10,3 +10,8 @@ export function deleteVenue(id) {
   const endpoint = `${ENDPOINTS.venues}/${id}`;
   return apiRequest(endpoint, 'DELETE', null, true);
 }
+
+export function updateVenue(id, data) {
+  const endpoint = `${ENDPOINTS.venues}/${id}`;
+  return apiRequest(endpoint, 'PUT', data, true);
+}

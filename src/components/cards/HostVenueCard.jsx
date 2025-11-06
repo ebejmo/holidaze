@@ -3,10 +3,12 @@ import Icon from '../ui/Icon';
 import { handleImageError } from '../../utils/handleImageError';
 import { useToast } from '../../context/toast/useToast';
 import { deleteVenue } from '../../api/venues';
+import { useAppModals } from '../../hooks/useAppModals';
 
 // re visit when create venue is up and running (styles)
 export default function HostVenueCard({ venue }) {
   const { addToast } = useToast();
+  const { openUpdateVenueModal } = useAppModals();
 
   async function handleDeleteVenue() {
     const confirmDelete = window.confirm(
@@ -68,7 +70,10 @@ export default function HostVenueCard({ venue }) {
 
       {/* Fix button styles to be consistent over screen sizes */}
       <div className="mt-3 d-flex flex-column flex-lg-row gap-2">
-        <button className="btn btn-outline-secondary btn-sm w-100 w-lg-auto flex-fill">
+        <button
+          className="btn btn-outline-secondary btn-sm w-100 w-lg-auto flex-fill"
+          onClick={() => openUpdateVenueModal(venue)}
+        >
           Manage
         </button>
         <button
