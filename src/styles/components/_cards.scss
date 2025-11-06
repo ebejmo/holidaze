@@ -8,6 +8,13 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   }
 
+  .badge-holidaze {
+    background-color: $accent;
+    color: $dark;
+    font-weight: $fw-semibold;
+    align-self: flex-start;
+  }
+
   .card-img-top-wrapper {
     height: 180px;
     overflow: hidden;
@@ -38,5 +45,88 @@
   .price {
     margin-top: auto;
     font-weight: $fw-semibold;
+  }
+}
+
+.booking-card,
+.host-venue-card {
+  @extend .venue-card;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: hidden;
+
+  .card-top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  img {
+    width: 100%;
+    max-width: 100%;
+    height: 140px;
+    object-fit: cover;
+  }
+
+  .booking-info,
+  .venue-info {
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: left;
+  }
+
+  .small-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+    align-items: center;
+  }
+
+  .badge.completed {
+    background-color: $border-color;
+    color: $text-muted;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .card-top {
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+
+      img {
+        width: 100px;
+        height: 80px;
+      }
+    }
+
+    .card-action {
+      margin-left: 1rem;
+      align-self: center;
+    }
+  }
+}
+
+.host-venue-card {
+  @extend .booking-card;
+
+  .btn {
+    padding: 0.25rem 0.75rem;
+  }
+}
+
+.host-booking-card {
+  @extend .venue-card;
+
+  img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
   }
 }

@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { getRatingLabel } from '../../utils/ratingUtils';
+import { handleImageError } from '../../utils/handleImageError';
 
 export default function VenueCard({ venue }) {
-  const { id, name, media, location, price, rating } = venue;
+  const { id, name, media, price, rating } = venue;
 
   const imageUrl =
     media && media.length > 0
@@ -11,8 +12,12 @@ export default function VenueCard({ venue }) {
   const imageAlt =
     media && media.length > 0 ? media[0].alt || name : `${name} image`;
 
-  const city = location?.city?.trim() || 'N/A';
-  const country = location?.country?.trim() || 'N/A';
+  const city = venue?.location?.city?.trim();
+  const country = venue?.location?.country?.trim();
+  const locationText =
+    city && country
+      ? `${city}, ${country}`
+      : city || country || 'Location unknown';
 
   return (
     <div className="col-6 col col-md-4 col-lg-3 mb-4">
@@ -21,7 +26,12 @@ export default function VenueCard({ venue }) {
         className="card h-100 text-decoration-none text-dark venue-card"
       >
         <div className="card-img-top-wrapper">
-          <img src={imageUrl} alt={imageAlt} className="card-img-top" />
+          <img
+            src={imageUrl}
+            alt={imageAlt}
+            className="card-img-top"
+            onError={handleImageError}
+          />
         </div>
         <div className="card-body">
           {typeof rating === 'number' && (
@@ -30,9 +40,7 @@ export default function VenueCard({ venue }) {
             </span>
           )}
           <h5 className="card-title mb-2">{name}</h5>
-          <p className="card-text mb-2">
-            {city}, {country}
-          </p>
+          <p className="card-text mb-2">{locationText}</p>
           {price !== undefined && <p className="price">{price} kr / night</p>}
         </div>
       </Link>

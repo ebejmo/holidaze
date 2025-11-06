@@ -3,7 +3,9 @@ import Icon from '../ui/Icon';
 export default function VenueFacts({ location, price, maxGuests }) {
   const { address, city, country } = location || {};
   const locationText =
-    city && country ? `${city}, ${country}` : 'Location unknown';
+    city && country
+      ? `${city}, ${country}`
+      : city || country || 'Location unknown';
 
   return (
     <section className="mb-4 venue-facts" aria-label="Venue facts">
@@ -16,7 +18,7 @@ export default function VenueFacts({ location, price, maxGuests }) {
 
         <li className="d-flex align-items-center gap-2 flex-wrap">
           <Icon name="money" size="lg" className="text-secondary" />
-          <span>${price ?? 0} / night</span>
+          <span>{price ?? 0} kr / night</span>
         </li>
 
         <li className="d-flex align-items-center gap-2 flex-wrap">

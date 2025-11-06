@@ -15,6 +15,7 @@ import {
   FaTimes,
   FaExclamationTriangle,
   FaInfoCircle,
+  FaHome,
 } from 'react-icons/fa';
 
 const icons = {
@@ -34,6 +35,7 @@ const icons = {
   close: FaTimes,
   warning: FaExclamationTriangle,
   info: FaInfoCircle,
+  home: FaHome,
 };
 
 export default function Icon({ name, size = 'md', className = '', ...props }) {

@@ -1,5 +1,6 @@
-export default function ManagerSection({ bookings = [], venueId }) {
-  //lets revisit this when create venue is created
+import { handleImageError } from '../../utils/handleImageError';
+
+export default function ManagerSection({ bookings = [] }) {
   const hasBookings = bookings.length > 0;
 
   return (
@@ -16,16 +17,14 @@ export default function ManagerSection({ bookings = [], venueId }) {
           {bookings.map((booking) => (
             <div
               key={booking.id}
-              className="list-group-item d-flex align-items-center justify-content-between"
+              className="list-group-item rounded-3 host-booking-card"
             >
               <div className="d-flex align-items-center">
                 <img
                   src={booking.customer?.avatar?.url}
                   alt={booking.customer?.name}
                   className="rounded-circle me-3"
-                  // add this to stylesheet
-                  width="48"
-                  height="48"
+                  onError={handleImageError}
                 />
                 <div>
                   <h6 className="mb-0">{booking.customer?.name}</h6>
@@ -39,13 +38,6 @@ export default function ManagerSection({ bookings = [], venueId }) {
           ))}
         </div>
       )}
-
-      <div className="d-flex flex-column flex-sm-row gap-3">
-        <button className="btn btn-outline-secondary flex-fill">
-          Manage Venue
-        </button>
-        <button className="btn btn-danger flex-fill">Delete Venue</button>
-      </div>
     </>
   );
 }

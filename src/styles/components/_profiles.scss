@@ -1,0 +1,28 @@
+.profile-banner {
+  min-height: 160px;
+  max-height: 200px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.profile-info {
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  @media (min-width: 768px) {
+    text-align: left;
+    .profile-avatar {
+      margin-left: 0;
+    }
+  }
+}
+
+.profile-stats {
+  .stat-card {
+    width: 100%;
+  }
+}

@@ -1,6 +1,10 @@
 import { useModal } from '../context/modal/useModal';
-import { AuthModal } from '../components/modal';
-// add imports avatar modal create venue modal etc here
+import {
+  AuthModal,
+  CreateVenueModal,
+  UpdateVenueModal,
+  UpdateAvatarModal,
+} from '../components/modal';
 
 export function useAppModals() {
   const { openModal, closeModal } = useModal();
@@ -9,8 +13,29 @@ export function useAppModals() {
     openModal(<AuthModal initialMode={mode} />, {});
   }
 
+  function openCreateVenueModal(profile) {
+    openModal(<CreateVenueModal profile={profile} />, {
+      title: 'Create venue',
+      size: 'md',
+    });
+  }
+
+  function openUpdateAvatarModal() {
+    openModal(<UpdateAvatarModal />, {});
+  }
+
+  function openUpdateVenueModal(venue) {
+    openModal(<UpdateVenueModal venue={venue} />, {
+      title: `Update ${venue.name}`,
+      size: 'md',
+    });
+  }
+
   return {
     openAuthModal,
+    openCreateVenueModal,
+    openUpdateAvatarModal,
+    openUpdateVenueModal,
     closeModal,
   };
 }
