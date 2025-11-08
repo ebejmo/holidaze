@@ -8,7 +8,7 @@ export default function VenueCard({ venue }) {
   const imageUrl =
     media && media.length > 0
       ? media[0].url
-      : 'https://placehold.co/600x400/orange/white?text=Holidaze';
+      : 'https://placehold.co/500x500?text=Holidaze';
   const imageAlt =
     media && media.length > 0 ? media[0].alt || name : `${name} image`;
 
