@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useApi } from '../hooks/useApi';
 import { useNavigate } from 'react-router-dom';
 import { ENDPOINTS } from '../config';
@@ -6,14 +6,16 @@ import Spinner from '../components/ui/Spinner';
 import EmptyState from '../components/ui/EmptyState';
 import VenueList from '../components/lists/VenueList';
 import Search from '../components/search/Search';
+import SortBy from '../components/ui/SortBy';
 import Pagination from '../components/ui/Pagination';
+
+const FETCH_LIMIT = 100;
+const PAGE_SIZE = 24;
 
 export default function HomePage() {
   const [page, setPage] = useState(1);
+  const [sortBy, setSortBy] = useState('latest');
   const navigate = useNavigate();
-
-  const FETCH_LIMIT = 100;
-  const PAGE_SIZE = 24;
 
   const {
     data: venues,
@@ -21,9 +23,28 @@ export default function HomePage() {
     error,
   } = useApi(ENDPOINTS.latestVenues(FETCH_LIMIT));
 
-  const totalPages = venues ? Math.ceil(venues.length / PAGE_SIZE) : 1;
+  const sortedVenues = useMemo(() => {
+    if (!venues) return [];
+
+    const venuesCopy = [...venues];
+
+    switch (sortBy) {
+      case 'price':
+        return venuesCopy.sort((a, b) => a.price - b.price);
+      case 'rating':
+        return venuesCopy.sort((a, b) => b.rating - a.rating);
+      case 'latest':
+      default:
+        return venuesCopy.sort(
+          (a, b) => new Date(b.created) - new Date(a.created)
+        );
+    }
+  }, [venues, sortBy]);
+
+  const totalPages = venues ? Math.ceil(sortedVenues.length / PAGE_SIZE) : 1;
   const startIndex = (page - 1) * PAGE_SIZE;
-  const venuesToShow = venues?.slice(startIndex, startIndex + PAGE_SIZE) || [];
+  const venuesToShow =
+    sortedVenues?.slice(startIndex, startIndex + PAGE_SIZE) || [];
   const canGoPrev = page > 1;
   const canGoNext = page < totalPages;
 
@@ -31,17 +52,22 @@ export default function HomePage() {
     document.title = 'Home | Holidaze';
   }, []);
 
-  const handleResultClick = (id) => {
+  function handleResultClick(id) {
     navigate(`/venues/${id}`);
-  };
+  }
 
-  const handleNextPage = () => {
+  function handleNextPage() {
     if (canGoNext) setPage((prev) => prev + 1);
-  };
+  }
 
-  const handlePrevPage = () => {
+  function handlePrevPage() {
     if (canGoPrev) setPage((prev) => prev - 1);
-  };
+  }
+
+  function handleSortChange(e) {
+    setSortBy(e.target.value);
+    setPage(1);
+  }
 
   if (loading) return <Spinner centered />;
   if (error) return <EmptyState title="Error" body={String(error)} />;
@@ -57,7 +83,7 @@ export default function HomePage() {
       </section>
 
       <section>
-        <h2 className="mb-3">All Venues</h2>
+        <SortBy value={sortBy} onChange={handleSortChange} />
         <VenueList venues={venuesToShow} />
 
         <Pagination
