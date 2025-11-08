@@ -7,6 +7,5 @@ export async function searchVenues(query) {
   );
   if (!response.ok) throw new Error('Search failed');
   const json = await response.json();
-  console.log('Search results:', json.data);
   return json.data;
 }
