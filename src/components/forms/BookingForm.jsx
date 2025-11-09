@@ -4,13 +4,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { bookingSchema } from '../../schemas/bookingSchema';
 import { createBooking } from '../../api/bookings';
 import { useToast } from '../../context/toast/useToast';
-import {
-  calculateNights,
-  getTodaysDate,
-  isDateBooked,
-} from '../../utils/dateUtils';
-import FormField from './FormField';
 import GuestSelector from '../venueDetail/GuestSelector';
+import AvailabilityCalendar from '../venueDetail/Calendar';
+import { calculateNights, formatLocalDate } from '../../utils/dateUtils';
 
 export default function BookingForm({
   price = 0,
@@ -20,10 +16,8 @@ export default function BookingForm({
   onBookingCreated,
 }) {
   const { addToast } = useToast();
-  const today = useMemo(() => getTodaysDate(), []);
 
   const {
-    register,
     handleSubmit,
     setValue,
     watch,
@@ -51,20 +45,25 @@ export default function BookingForm({
     [nights, price]
   );
 
+  function handleCalendarSelect(range) {
+    if (!range) return;
+    const [from, to] = range;
+    setValue('dateFrom', formatLocalDate(from), { shouldValidate: true });
+    setValue('dateTo', formatLocalDate(to), { shouldValidate: true });
+  }
+
   function limitGuests(next) {
     const safeValue = Math.max(1, Math.min(maxGuests, next));
     setValue('guests', safeValue, { shouldValidate: true });
   }
 
   async function onSubmit(values) {
-    const payload = { venueId, ...values };
-
     try {
-      const created = await createBooking(payload);
+      const payload = { venueId, ...values };
+      await createBooking(payload);
       addToast('Booking confirmed!', 'success');
 
-      if (onBookingCreated && created) onBookingCreated(created);
-
+      if (onBookingCreated) onBookingCreated();
       setValue('dateFrom', '');
       setValue('dateTo', '');
       setValue('guests', 1);
@@ -76,36 +75,10 @@ export default function BookingForm({
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <div className="row g-2">
-        <div className="col-12 col-sm-6">
-          <FormField
-            label="From"
-            name="dateFrom"
-            type="date"
-            register={register}
-            error={errors.dateFrom}
-            min={today}
-            disabled={isSubmitting}
-            onChange={(e) => {
-              const value = e.target.value;
-              if (isDateBooked(value, existingBookings)) {
-                addToast(
-                  'This date is unavailable, please try another',
-                  'danger'
-                );
-              }
-            }}
-          />
-        </div>
-
-        <div className="col-12 col-sm-6">
-          <FormField
-            label="To"
-            name="dateTo"
-            type="date"
-            register={register}
-            error={errors.dateTo}
-            min={dateFrom || today}
-            disabled={isSubmitting}
+        <div className="col-12">
+          <AvailabilityCalendar
+            existingBookings={existingBookings}
+            onSelect={handleCalendarSelect}
           />
         </div>
       </div>
@@ -120,7 +93,7 @@ export default function BookingForm({
 
       <div className="d-flex justify-content-between align-items-center mb-3">
         <span className="fw-semibold">Total</span>
-        <span className="fw-semibold">{total.toFixed(2)} kr</span>
+        <span className="fw-semibold">{total} kr</span>
       </div>
 
       <button
@@ -128,7 +101,7 @@ export default function BookingForm({
         className="btn btn-primary w-100"
         disabled={isSubmitting}
       >
-        {isSubmitting ? 'Reserving…' : 'Reserve'}
+        {isSubmitting ? 'Booking…' : 'Book'}
       </button>
     </form>
   );

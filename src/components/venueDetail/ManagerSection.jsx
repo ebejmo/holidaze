@@ -1,3 +1,4 @@
+import { formatLocalDate } from '../../utils/dateUtils';
 import { handleImageError } from '../../utils/handleImageError';
 
 export default function ManagerSection({ bookings = [] }) {
@@ -29,8 +30,8 @@ export default function ManagerSection({ bookings = [] }) {
                 <div>
                   <h6 className="mb-0">{booking.customer?.name}</h6>
                   <small className="">
-                    {new Date(booking.dateFrom).toLocaleDateString()} -{' '}
-                    {new Date(booking.dateTo).toLocaleDateString()}
+                    {formatLocalDate(booking.dateFrom)} -{' '}
+                    {formatLocalDate(booking.dateTo)}
                   </small>
                 </div>
               </div>
