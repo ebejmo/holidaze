@@ -10,16 +10,6 @@ export function calculateNights(fromDate, toDate) {
   return Math.ceil(differenceInDays);
 }
 
-// export function getTodaysDate() {
-//   const today = new Date();
-//   const year = today.getFullYear();
-//   const month = today.getMonth() + 1;
-//   const day = today.getDate();
-//   const formattedMonth = month < 10 ? '0' + month : month;
-//   const formattedDay = day < 10 ? '0' + day : day;
-//   return `${year}-${formattedMonth}-${formattedDay}`;
-// }
-
 export function formatLocalDate(date) {
   if (!date) return '';
 
@@ -30,11 +20,3 @@ export function formatLocalDate(date) {
 
   return `${year}-${month}-${day}`;
 }
-
-// export function isDateBooked(date, bookings = []) {
-//   const target = new Date(date);
-//   return bookings.some(
-//     (booking) =>
-//       target >= new Date(booking.dateFrom) && target <= new Date(booking.dateTo)
-//   );
-// }
