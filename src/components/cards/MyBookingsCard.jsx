@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Icon from '../ui/Icon';
 import { handleImageError } from '../../utils/handleImageError';
+import { formatLocalDate } from '../../utils/dateUtils';
 
 export default function MyBookingCard({ booking }) {
   const venue = booking?.venue;
@@ -9,10 +10,13 @@ export default function MyBookingCard({ booking }) {
   const alt = venue?.media?.[0]?.alt || venue?.name || 'Venue image';
   const title = venue?.name || 'Untitled Venue';
 
-  const startDate = new Date(booking.dateFrom).toLocaleDateString();
-  const endDate = new Date(booking.dateTo).toLocaleDateString();
+  const startDate = formatLocalDate(booking.dateFrom);
+  const endDate = formatLocalDate(booking.dateTo);
 
-  const isUpcoming = new Date(booking.dateFrom) > new Date();
+  const today = new Date(formatLocalDate(new Date()));
+  const start = new Date(booking.dateFrom);
+
+  const isUpcoming = start >= today;
   const statusClass = isUpcoming ? 'upcoming' : 'completed';
   const statusLabel = isUpcoming ? 'Upcoming' : 'Completed';
 

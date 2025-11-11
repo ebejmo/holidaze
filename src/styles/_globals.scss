@@ -85,3 +85,11 @@ small,
   font-weight: $fw-semibold;
   align-self: flex-start;
 }
+
+#sortBy {
+  width: 180px;
+}
+
+.toast-container {
+  z-index: 5;
+}

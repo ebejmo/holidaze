@@ -20,7 +20,7 @@ export default function Search({ onResultClick }) {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleSearchChange = async (e) => {
+  async function handleSearchChange(e) {
     const value = e.target.value;
     setQuery(value);
 
@@ -40,14 +40,14 @@ export default function Search({ onResultClick }) {
       setResults([]);
       setIsOpen(false);
     }
-  };
+  }
 
-  const handleSelect = (id) => {
+  function handleSelect(id) {
     setQuery('');
     setResults([]);
     setIsOpen(false);
     onResultClick(id);
-  };
+  }
 
   return (
     <div className="search-wrapper" ref={searchRef}>

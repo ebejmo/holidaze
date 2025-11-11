@@ -5,8 +5,7 @@ import { useToast } from '../../context/toast/useToast';
 import { deleteVenue } from '../../api/venues';
 import { useAppModals } from '../../hooks/useAppModals';
 
-// re visit when create venue is up and running (styles)
-export default function HostVenueCard({ venue }) {
+export default function HostVenueCard({ venue, isOwnProfile }) {
   const { addToast } = useToast();
   const { openUpdateVenueModal } = useAppModals();
 
@@ -68,21 +67,22 @@ export default function HostVenueCard({ venue }) {
         </div>
       </div>
 
-      {/* Fix button styles to be consistent over screen sizes */}
-      <div className="mt-3 d-flex flex-column flex-lg-row gap-2">
-        <button
-          className="btn btn-outline-secondary btn-sm w-100 w-lg-auto flex-fill"
-          onClick={() => openUpdateVenueModal(venue)}
-        >
-          Manage
-        </button>
-        <button
-          onClick={handleDeleteVenue}
-          className="btn btn-danger btn-sm w-100 w-lg-auto flex-fill"
-        >
-          Delete
-        </button>
-      </div>
+      {isOwnProfile && (
+        <div className="mt-3 d-flex flex-column flex-lg-row gap-2">
+          <button
+            className="btn btn-outline-secondary btn-sm w-100 w-lg-auto flex-fill"
+            onClick={() => openUpdateVenueModal(venue)}
+          >
+            Manage
+          </button>
+          <button
+            onClick={handleDeleteVenue}
+            className="btn btn-danger btn-sm w-100 w-lg-auto flex-fill"
+          >
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   );
 }

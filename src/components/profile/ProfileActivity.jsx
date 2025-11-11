@@ -21,7 +21,11 @@ export default function ProfileActivity({ profile, isOwnProfile }) {
               <div>
                 <div className="list-group">
                   {profile.venues.map((venue) => (
-                    <HostVenueCard key={venue.id} venue={venue} />
+                    <HostVenueCard
+                      key={venue.id}
+                      venue={venue}
+                      isOwnProfile={isOwnProfile}
+                    />
                   ))}
                 </div>
 

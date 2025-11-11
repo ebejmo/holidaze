@@ -6,6 +6,11 @@ export const ENDPOINTS = {
   login: '/auth/login',
 
   venues: '/holidaze/venues',
+  latestVenues: (limit = 100) =>
+    `/holidaze/venues?sort=created&sortOrder=desc&limit=${limit}`,
+  paginatedVenues: (page = 1, limit = 24) =>
+    `/holidaze/venues?sort=created&sortOrder=desc&limit=${limit}&${page}`,
+
   singleVenue: (id) => `/holidaze/venues/${id}?_owner=true&_bookings=true`,
   deleteVenue: (id) => `/holidaze/venues/${id}`,
 

@@ -13,6 +13,38 @@ const getInitialState = () => {
   return { user: null, accessToken: null };
 };
 
+/**
+ * Provides authentication state and actions throughout the application.
+ *
+ * Handles storing, retrieving, and clearing user data and tokens using localStorage.
+ * Exposes login/logout methods and authentication flags via React Context.
+ *
+ * @component
+ * @param {Object} props - React props.
+ * @param {React.ReactNode} props.children - Child components that will have access to the authentication context.
+ * @returns {JSX.Element} The context provider wrapping the app.
+ *
+ * @example
+ * // Example: wrapping the entire app in the provider
+ * import { AuthProvider } from './context/auth/AuthProvider';
+ *
+ * function App() {
+ *   return (
+ *     <AuthProvider>
+ *       <AppRoutes />
+ *     </AuthProvider>
+ *   );
+ * }
+ *
+ * @context
+ * Provides the following values:
+ * - `user` {Object|null} - The authenticated user object, or `null` if not logged in.
+ * - `accessToken` {string|null} - The access token for API requests.
+ * - `isAuthenticated` {boolean} - Whether the user is currently authenticated.
+ * - `isManager` {boolean} - Whether the user has venue manager privileges.
+ * - `login(apiResult)` {Function} - Stores user and token to state and localStorage.
+ * - `logout()` {Function} - Clears user and token from state and localStorage.
+ */
 export function AuthProvider({ children }) {
   const [auth, setAuth] = useState(getInitialState);
 

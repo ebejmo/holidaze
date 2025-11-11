@@ -47,7 +47,7 @@ export default function VenueBookingSection({
           >
             register
           </button>{' '}
-          to make a reservation.
+          to make a booking.
         </p>
       </section>
     );
