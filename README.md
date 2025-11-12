@@ -3,7 +3,7 @@
 ## Overview
 
 Holidaze is a responsive front-end application for the Noroff Holidaze API.  
-Users can browse venues, view availability, book stays, and - if they’re feeling frisky - register as a venue manager (host) to create and manage listings.
+Users can browse venues, view availability, book stays (and if they’re feeling frisky) register as a venue manager (host) to create and manage listings.
 
 ## Features
 
@@ -20,7 +20,7 @@ Users can browse venues, view availability, book stays, and - if they’re feeli
 - **Styles:** Bootstrap 5 + SCSS
 - **Validation:** React Hook Form + Yup
 - **State and Context:** Custom React Contexts (Auth, Modal and Toast)
-- **Hosting:** [Netlify](link)
+- **Hosting:** Netlify
 - **API:** [Noroff Holidaze API](https://docs.noroff.dev/docs/v2/holidaze/bookings)
 
 ## Installation
@@ -38,10 +38,11 @@ cd holidaze
 npm install
 ```
 
-3. Create a .env file and add your base URL:
+3. Create a .env file and your environment variables:
 
 ```bash
 VITE_API_BASE_URL=https://v2.api.noroff.dev
+VITE_API_KEY=noroff-api-key-here
 ```
 
 4. Run the development server:
@@ -52,7 +53,9 @@ npm run dev
 
 ## Links
 
-here
+Live Demo: [Holidaze](https://holidazeeb.netlify.app/)
+Repo: [GitHub](https://github.com/ebejmo/holidaze/tree/main)
+Gantt Chart: [Trello](https://trello.com/b/wJIz4dVX/project-exam-2-holidaze)
 
 [![Lint](https://github.com/ebejmo/holidaze/actions/workflows/lint.yml/badge.svg)](https://github.com/ebejmo/holidaze/actions/workflows/lint.yml)
 [![Build](https://github.com/ebejmo/holidaze/actions/workflows/build.yml/badge.svg)](https://github.com/ebejmo/holidaze/actions/workflows/build.yml)
