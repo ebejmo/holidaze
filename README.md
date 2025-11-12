@@ -3,7 +3,7 @@
 ## Overview
 
 Holidaze is a responsive front-end application for the Noroff Holidaze API.  
-Users can browse venues, view availability, book stays, and - if they’re feeling frisky - register as a venue manager (host) to create and manage listings.
+Users can browse venues, view availability, book stays (and if they’re feeling frisky) register as a venue manager (host) to create and manage listings.
 
 ## Features
 
@@ -20,7 +20,7 @@ Users can browse venues, view availability, book stays, and - if they’re feeli
 - **Styles:** Bootstrap 5 + SCSS
 - **Validation:** React Hook Form + Yup
 - **State and Context:** Custom React Contexts (Auth, Modal and Toast)
-- **Hosting:** [Netlify](link)
+- **Hosting:** Netlify
 - **API:** [Noroff Holidaze API](https://docs.noroff.dev/docs/v2/holidaze/bookings)
 
 ## Installation
