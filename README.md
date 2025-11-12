@@ -38,10 +38,11 @@ cd holidaze
 npm install
 ```
 
-3. Create a .env file and add your base URL:
+3. Create a .env file and your environment variables:
 
 ```bash
 VITE_API_BASE_URL=https://v2.api.noroff.dev
+VITE_API_KEY=noroff-api-key-here
 ```
 
 4. Run the development server:
@@ -52,7 +53,9 @@ npm run dev
 
 ## Links
 
-here
+Live Demo: [Holidaze](https://holidazeeb.netlify.app/)
+Repo: [GitHub](https://github.com/ebejmo/holidaze/tree/main)
+Gantt Chart: [Trello](https://trello.com/b/wJIz4dVX/project-exam-2-holidaze)
 
 [![Lint](https://github.com/ebejmo/holidaze/actions/workflows/lint.yml/badge.svg)](https://github.com/ebejmo/holidaze/actions/workflows/lint.yml)
 [![Build](https://github.com/ebejmo/holidaze/actions/workflows/build.yml/badge.svg)](https://github.com/ebejmo/holidaze/actions/workflows/build.yml)
