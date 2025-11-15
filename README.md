@@ -55,7 +55,8 @@ npm run dev
 
 Live Demo: [Holidaze](https://holidazeeb.netlify.app/)
 Repo: [GitHub](https://github.com/ebejmo/holidaze/tree/main)
-Gantt Chart: [Trello](https://trello.com/b/wJIz4dVX/project-exam-2-holidaze)
+Kanban Board: [Trello](https://trello.com/invite/b/689cda05a23aeb34724c9984/ATTId17499b63261c975838b427850ff6bedAE0AA9C2/project-exam-2-holidaze)
+Gantt Chart: [Sheets](https://docs.google.com/spreadsheets/d/1AjBWml0lZGPY74u5x5r2rqai_6qxReYozd57WqC2uik/edit?usp=sharing)
 
 [![Lint](https://github.com/ebejmo/holidaze/actions/workflows/lint.yml/badge.svg)](https://github.com/ebejmo/holidaze/actions/workflows/lint.yml)
 [![Build](https://github.com/ebejmo/holidaze/actions/workflows/build.yml/badge.svg)](https://github.com/ebejmo/holidaze/actions/workflows/build.yml)
